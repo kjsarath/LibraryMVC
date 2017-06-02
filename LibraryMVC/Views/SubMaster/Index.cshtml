@@ -1,0 +1,55 @@
+﻿@model List<LibraryMVC.Models.LibrarySubMasterListSP_Result>
+@{
+    ViewBag.Title = "Sub Master List";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+<h2></h2>
+@using (Html.BeginForm())
+{
+    <h4 Style="text-align: right; font-family: Corbel; font-size: large;">SUB MASTERS - LIST</h4>
+    <hr />
+    <table style="width:100%">
+        <tr>
+            <td colspan="2">
+                <input type="text" id="txtSearch" placeholder="Type here to search with category or description..." style="width:100%" class="TextBoxTDBG4" onkeyup="Search()" />
+                <br />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="divPartialView">
+                    @Html.Partial("~/Views/SubMaster/SubMasterList.cshtml",Model )
+                </div>
+            </td>
+        </tr>
+    </table>
+    <script type="text/javascript">
+ function Search()
+    {
+        var searchVal = $("#txtSearch").val();
+        $.ajax
+            (
+                {
+                    type: "POST", // POST call
+                    url: '/SubMaster/SearchGrid', // call search action method of Home controller
+                    data:
+                    {
+                        searchString: searchVal
+                    }, // pass the parameter to action method. Here searchString is parameter of Action method from controller.
+                    dataType: 'html', // return html to render
+                    success: function (data)
+                    {
+                        $('#divPartialView').html(data); // Render filter result to div where partial view is there. We can render div and partial view should be inside div.
+                    }
+                }
+            );
+    }
+    </script>
+    <div class="form-group">
+        <div style="text-align: left">
+            <input type="submit" name="action:Add" value="Add New Entry" class="btn btn-success " />
+        </div>
+    </div>
+
+}
+

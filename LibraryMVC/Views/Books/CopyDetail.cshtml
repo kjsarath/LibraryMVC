@@ -1,0 +1,124 @@
+﻿@model LibraryMVC.Models.School_LibraryBookDetails
+@{
+    ViewBag.Title = "CopyDetail";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+@*@using (Html.BeginForm("CopyDetail", "Books", null, FormMethod.Post))*@
+
+<div style="font-family:Calibri ;font-size:10px">
+    <table style="width:100%;">
+        <tr>
+            <td colspan="4" Style="text-align: right; font-family: Corbel; font-size: large;">
+                DETAILS OF COPY
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.BookID)
+                @Html.HiddenFor(model => model.BookMastID, new { name = "BookMastID" })
+                    
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="SubHead">COPY DETAILS</td>
+        </tr>
+        <tr>
+            <td class="tdStyle2" style="width:10%">Accession No.</td>
+            <td class="TextBoxTDBG2" style="width: 40%">
+                <span class="dxeBase_DevEx" id="Span5"></span>
+                @Html.DisplayFor(model => model.AccessionNo)
+            </td>
+
+            <td class="tdStyle2" style="width:10%">Book Sub-Code</td>
+            <td class="TextBoxTDBG2" style="width: 40%">
+                <span class="dxeBase_DevEx" id="Span6"></span>
+                @Html.DisplayFor(model => model.BookSubCode)
+            </td>
+        </tr>
+        <tr>
+            <td class="tdStyle2" style="width:10%">Barcode</td>
+            <td class="TextBoxTDBG2" colspan="3" style="width: 85%">
+                <span class="dxeBase_DevEx" id="Span17"></span>
+                @Html.DisplayFor(model => model.Barcode)
+            </td>
+
+        </tr>
+        <tr>
+            <td colspan="4" class="SubHead">PRINT DETAILS</td>
+        </tr>
+        <tr>
+            <td class="tdStyle2" style="width:10%">Edition</td>
+            <td class="TextBoxTDBG2" style="width: 40%">
+                <span class="dxeBase_DevEx" id="Span5"></span>
+                @Html.DisplayFor(model => model.Edition)
+            </td>
+            <td class="tdStyle2" style="width:10%">Published Year</td>
+            <td class="TextBoxTDBG2" style="width: 40%">
+                <span class="dxeBase_DevEx" id="Span6"></span>
+                @Html.DisplayFor(model => model.PublishedYear)
+            </td>
+        </tr>
+        <tr>
+            <td class="tdStyle2" style="width:10%">Language</td>
+            <td class="TextBoxTDBG2" style="width: 40%">
+                <span class="dxeBase_DevEx" id="Span5"></span>
+                @Html.DisplayFor(model => model.BookLanguage)
+            </td>
+            <td style="width:10%"></td>
+            <td style="width: 40%">
+                <span class="dxeBase_DevEx" id="Span6"></span>
+            </td>
+        </tr>
+        <tr>
+            <td class="tdStyle2" style="width:10%">Purchase Date</td>
+            <td class="TextBoxTDBG2" style="width: 40%">
+                <span class="dxeBase_DevEx" id="Span5"></span>
+                @Html.DisplayFor(model => model.PurchaseDate)
+            </td>
+            <td class="tdStyle2" style="width:10%">Cost in AED</td>
+            <td class="TextBoxTDBG2" style="width: 40%">
+                <span class="dxeBase_DevEx" id="Span6"></span>
+                @Html.DisplayFor(model => model.CostinDhs)
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="SubHead">STATUS DETAILS</td>
+        </tr>
+        <tr>
+            <td class="tdStyle2" style="width:10%">Current Status</td>
+            <td class="TextBoxTDBG2" style="width: 40%">
+                <span class="dxeBase_DevEx" id="Span5"></span>
+                @Html.DisplayFor(model => model.Status)
+            </td>
+            <td class="tdStyle2" style="width:10%">In Or Out</td>
+            <td class="TextBoxTDBG2" style="width: 40%">
+                <span class="dxeBase_DevEx" id="Span6"></span>
+                @Html.DisplayFor(model => model.IssueStatus)
+            </td>
+        </tr>
+    </table>
+</div>
+
+<br />
+<table style="width:100%">
+    <tr>
+        <td style="width:60px">
+            <form method="post">
+                <div class="form-group">
+                    <div style="text-align: left">
+                        <input type="submit" name="action:EditCopy" value="Edit" class="btn btn-success " />
+                    </div>
+                </div>
+            </form>
+        </td>
+        <td>
+            <form method="post">
+                <div class="form-group">
+                    <div style="text-align: left">
+                        <input type="submit" name="action:BackToBook" value="Back To Book" class="btn btn-primary " />
+                        @Html.HiddenFor(model => model.BookMastID, new { name = "BookMastID" })
+                        @*<input type="text" id="txtBookMastID" name="txtBookMastID" style="" hidden="hidden" value="@Model.BookMastID " />*@
+                    </div>
+                </div>
+            </form>
+        </td>
+    </tr>
+</table>

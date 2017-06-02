@@ -1,0 +1,77 @@
+﻿@model LibraryMVC.Models.PortalUser
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_newLayout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <br />
+    <table align="center">
+        <tr>
+            <td>
+                <div class="panel panel-success" style="width:300px;align-content:center;align-self:center  ">
+                    <div class="panel-heading text-center"><h4>Enter your credentails</h4></div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            <table style="width:100%">
+                                <tr>
+                                    <td style="width:40%;vertical-align:baseline  ">
+                                        <label style="width:100%">USERNAME</label>
+                                    </td>
+                                    <td style="width:60%;vertical-align:central ">
+                                        @Html.EditorFor(m => m.UserName, new { @class = "form-control" })
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="form-group">
+                            <table style="width:100%">
+                                <tr>
+                                    <td style="width:40%;vertical-align:baseline ">
+                                        <label style="width:100%">PASSWORD</label>
+                                    </td>
+                                    <td style="width:60%;vertical-align:central ">
+                                        @Html.EditorFor(m => m.Password, new { @class = "form-control" })
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="text-center">
+                            <input class="btn btn-success" type="submit" value="LogIn" />
+                        </div>
+                    </div>
+                    @*<table border="0">
+                            <tr>
+                                <td>@Html.LabelFor(m => m.UserName)</td>
+                                <td>@Html.EditorFor(m => m.UserName)</td>
+                            </tr>
+                            <tr>
+                                <td>@Html.LabelFor(m => m.Password)</td>
+                                <td>@Html.EditorFor(m => m.Password)</td>
+                            </tr>
+                            <tr>
+                                <td><input type="submit" value="LogIn" /></td>
+                            </tr>
+
+                        </table>*@
+                </div>
+                <div style="color:red;font-weight:bold ">
+                    @Html.ValidationSummary()
+                </div>
+            </td>
+        </tr>
+    </table>
+}
+@if (@ViewBag.Message != null)
+{
+    <ul>
+        <li>
+            @ViewBag.Message
+        </li>
+    </ul>
+
+}
+

@@ -1,0 +1,58 @@
+﻿@model LibraryMVC.Models.LibrarySubMasterDetailsSP_Result 
+@{
+    ViewBag.Title = "Add New Sub Master";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div style="font-family:Calibri ;font-size:10px">
+        <table style="width:100%;">
+            <tr>
+                <td colspan="4" Style="text-align: right; font-family: Corbel; font-size: large;">
+                    EDIT MEMBER - DETAILS
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.ID)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" class="SubHead">DETAILS</td>
+            </tr>
+            <tr>
+                <td class="tdStyle2" style="width:10%">Category</td>
+                <td class="TextBoxTDBG3" style="width: 40%">
+                    @{
+                        var lI = new List<SelectListItem>
+                            {
+                                new SelectListItem { Text="Publisher",Value="Publisher"},
+                                new SelectListItem { Text = "Subject", Value = "Subject" }
+                            };
+                    }
+                    @Html.DropDownListFor(model => model.Category, lI, new { htmlAttributes = new { @class = "TextBoxTDBG4" } })
+                    @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+                </td>
+
+            </tr>
+            <tr>
+                <td class="tdStyle2" style="width:10%">Description</td>
+                <td class="TextBoxTDBG3" style="width: 40%">
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "TextBoxTDBG4" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+        </table>
+    </div>
+    <br />
+    <form method="post">
+        <div class="form-group">
+            <div style="text-align: left">
+                <input type="submit" name="action:Save" value="Save" class="btn btn-success " />
+                <input type="submit" name="action:Back" value="Cancel" class="btn btn-danger" />
+            </div>
+        </div>
+        <div style="text-align: left">
+            <input type="submit" name="action:Back" value="Back To List" class="btn btn-primary " />
+        </div>
+    </form>
+                        }

@@ -1,0 +1,268 @@
+﻿@model LibraryMVC.Models.School_LibraryBookMaster
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+
+<h2></h2>
+@section head
+{
+    <script src="../../Scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+}
+<div style="font-family:Calibri ;font-size:10px">
+    <table style="width:100%">
+        <tr>
+            <td colspan="4" Style="text-align: right; font-family: Corbel; font-size: large;">
+                DETAILS OF BOOK
+                <hr />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="SubHead">BOOK DETAILS</td>
+            @Html.HiddenFor(model => model.BookMastID)
+        </tr>
+        <tr>
+            <td align="right" class="tdStyle" style="width: 15%">Name</td>
+            <td colspan="2" class="TextBoxTDBG2" >
+                <span class="dxeBase_DevEx" id="Span1"></span>
+                @Html.DisplayFor(model => model.Title)
+            </td>
+            <td style="width: 25%;padding-right:10px;padding-top:3px" rowspan="5" align="right">
+                @{
+                    if (Model.img != null)
+                    {
+                        string imageBase64 = Convert.ToBase64String(Model.img);
+                        string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+                        <img src="@imageSrc" width="90" height="120" />
+                    }
+                }
+            </td>
+        </tr>
+        <tr>
+            <td align="right" class="tdStyle" style="width: 15%; height: 24px;">Code</td>
+            <td colspan="2" class="TextBoxTDBG2" style="height: 24px">
+                <span class="dxeBase_DevEx" id="ctl00_MainContent_ASPxCallbackPanelMain_txtCode"></span>
+                @Html.DisplayFor(model => model.BookCode)
+            </td>
+        </tr>
+        <tr>
+            <td align="right" class="tdStyle" style="width: 15%">Type</td>
+            <td colspan="2" class="TextBoxTDBG2">
+                <span class="dxeBase_DevEx" id="Span2"></span>
+                @Html.DisplayFor(model => model.Type)
+            </td>
+
+        </tr>
+        <tr>
+            <td align="right" class="tdStyle" style="width: 15%">Date of Entry</td>
+            <td colspan="2" class="TextBoxTDBG2">
+                <span class="dxeBase_DevEx" id="Span3"></span>
+                @Html.DisplayFor(model => model.dateofentry)
+            </td>
+
+        </tr>
+        <tr>
+            <td align="right" class="tdStyle" style="width: 15%">ISBN</td>
+            <td colspan="2" class="TextBoxTDBG2">
+                <span class="dxeBase_DevEx" id="Span4"></span>
+                @Html.DisplayFor(model => model.ISBN)
+            </td>
+
+        </tr>
+        <tr>
+            <td colspan="4" class="SubHead">AUTHOR &amp; PUBLISHER</td>
+        </tr>
+        <tr>
+            <td align="right" class="tdStyle" style="width: 15%">Author 1</td>
+            <td class="TextBoxTDBG2" style="width: 35%">
+                <span class="dxeBase_DevEx" id="Span5"></span>
+                @Html.DisplayFor(model => model.Author1)
+            </td>
+            <td class="tdStyle" style="width:15%">Author 2</td>
+            <td class="TextBoxTDBG2" style="width: 35%">
+                <span class="dxeBase_DevEx" id="Span6"></span>
+                @Html.DisplayFor(model => model.Author2)
+            </td>
+        </tr>
+        <tr>
+            <td align="right" class="tdStyle" style="width: 15%">Publisher</td>
+            <td class="TextBoxTDBG2" style="width: 35%">
+                <span class="dxeBase_DevEx" id="Span7"></span>
+                @Html.DisplayFor(model => model.Publisher)
+            </td>
+            <td class="tdStyle" style="width:15%">Sub Title</td>
+            <td class="TextBoxTDBG2" style="width: 35%">
+                <span class="dxeBase_DevEx" id="Span8"></span>
+                @Html.DisplayFor(model => model.SubTitle)
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="SubHead">OTHER DETAILS</td>
+        </tr>
+        <tr>
+            <td align="right" class="tdStyle" style="width: 15%">Series</td>
+            <td class="TextBoxTDBG2" style="width: 35%">
+                <span class="dxeBase_DevEx" id="Span9"></span>
+                @Html.DisplayFor(model => model.Series)
+            </td>
+            <td class="tdStyle" style="width:15%">Volume</td>
+            <td class="TextBoxTDBG2" style="width: 35%">
+                <span class="dxeBase_DevEx" id="Span10"></span>
+                @Html.DisplayFor(model => model.Volume)
+            </td>
+        </tr>
+        <tr>
+            <td align="right" class="tdStyle" style="width: 15%">Subject</td>
+            <td class="TextBoxTDBG2" style="width: 35%">
+                <span class="dxeBase_DevEx" id="Span11"></span>
+                @Html.DisplayFor(model => model.Category)
+            </td>
+            <td class="tdStyle" style="width:15%">GMD</td>
+            <td class="TextBoxTDBG2" style="width: 35%">
+                <span class="dxeBase_DevEx" id="Span12"></span>
+                @Html.DisplayFor(model => model.GMD)
+            </td>
+        </tr>
+        <tr>
+            <td align="right" class="tdStyle" style="width: 15%">Category</td>
+            <td class="TextBoxTDBG2" style="width: 35%">
+                <span class="dxeBase_DevEx" id="Span13"></span>
+                @Html.DisplayFor(model => model.ArticleType)
+            </td>
+            <td class="tdStyle" style="width:15%">Sub-Category</td>
+            <td class="TextBoxTDBG2" style="width: 35%">
+                <span class="dxeBase_DevEx" id="Span14"></span>
+                @Html.DisplayFor(model => model.ArticleCategory)
+            </td>
+        </tr>
+        <tr>
+            <td align="right" class="tdStyle" style="width: 15%">Language</td>
+            <td class="TextBoxTDBG2" style="width: 35%">
+                <span class="dxeBase_DevEx" id="Span15"></span>
+                @Html.DisplayFor(model => model.language)
+            </td>
+            <td style="width:15%"></td>
+            <td style="width: 35%">
+                <span class="dxeBase_DevEx" id="Span16"></span>
+            </td>
+        </tr>
+        <tr>
+            <td align="right" class="tdStyle" style="width: 15%">Remarks</td>
+            <td class="TextBoxTDBG2" colspan="3" style="width: 35%">
+                <span class="dxeBase_DevEx" id="Span17"></span>
+                @Html.DisplayFor(model => model.Remarks)
+            </td>
+
+        </tr>
+        <tr>
+            <td align="right" class="tdStyle" style="width: 15%">Synopsis</td>
+            <td class="TextBoxTDBG2" colspan="3" style="width: 35%">
+                <span class="dxeBase_DevEx" id="Span18"></span>
+                @Html.DisplayFor(model => model.description)
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="SubHead">CLASSIFICATION DETAILS</td>
+        </tr>
+        <tr>
+            <td align="right" class="tdStyle" style="width: 15%">Call No P1</td>
+            <td class="TextBoxTDBG2" style="width: 35%">
+                <span class="dxeBase_DevEx" id="Span19"></span>
+                @Html.DisplayFor(model => model.CallNo1P1)
+            </td>
+            <td class="tdStyle" style="width:15%">Call No P2</td>
+            <td class="TextBoxTDBG2" style="width: 35%">
+                <span class="dxeBase_DevEx" id="Span20"></span>
+                @Html.DisplayFor(model => model.CallNo2)
+            </td>
+        </tr>
+        <tr>
+            <td align="right" class="tdStyle" style="width: 15%">Pre-Call No</td>
+            <td class="TextBoxTDBG2" style="width: 35%">
+                <span class="dxeBase_DevEx" id="Span21"></span>
+                @Html.DisplayFor(model => model.CallNo1P2)
+            </td>
+            <td class="tdStyle" style="width:15%">Old Call No</td>
+            <td class="TextBoxTDBG2" style="width: 35%">
+                <span class="dxeBase_DevEx" id="Span22"></span>
+                @Html.DisplayFor(model => model.CallNo)
+            </td>
+        </tr>
+        
+    </table>
+</div>
+@*<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BookMastID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>*@
+<br />
+<table style="width:100%">
+    <tr>
+        <td style="width:60px">
+            <form method="get">
+                <div class="form-group">
+                    <div style="text-align: left">
+                        <input type="submit" name="action:Edit" value="Edit" class="btn btn-success " />
+                    </div>
+                </div>
+            </form>
+        </td>
+        <td>
+            <form method="post">
+                <div class="form-group">
+                    <div style="text-align: left">
+                        <input type="submit" name="action:Back" value="Back To List" class="btn btn-primary " />
+                    </div>
+                </div>
+            </form>
+        </td>
+    </tr>
+</table>
+<table style="width:100%">
+    <tr>
+        <td colspan="4" class="SubHead" style="font-family:Calibri">DETAILS OF COPIES</td>
+    </tr>
+</table>
+
+<div style="font-family:Calibri ;font-size:12px">
+        @{
+            WebGrid grid = new WebGrid(Model.School_LibraryBookDetails, canPage: true, rowsPerPage: 20, selectionFieldName: "selectedRow", ajaxUpdateContainerId: "gridContent");
+            grid.Pager(WebGridPagerModes.NextPrevious);
+            <div id="gridContent">
+                @grid.GetHtml(tableStyle: "table table-bordered table-striped table-condensed",
+     mode: WebGridPagerModes.All,
+     firstText: "<< First",
+     previousText: "< Prev",
+     nextText: "Next >",
+     lastText: "Last >>",
+     headerStyle: "grid-header",
+     footerStyle: "webgrid-footer",
+     alternatingRowStyle: "webgrid-alternating-row",
+     selectedRowStyle: "webgrid-selected-row",
+     rowStyle: "gridrow",
+     columns: grid.Columns
+     (
+     //grid.Column("Id", format: (item) => item.GetSelectLink(item.Id)),
+     //grid.Column(null, null, format: @<input type="hidden" name="BookMastID" value="@item.BookMastID" />),//"BookMastID", "BookID"),
+     grid.Column("AccessionNo", "ACESSION NO", style: "description"),
+     //grid.Column("PublishedYear", "YEAR OF PUBLISH", style: "description"),
+     grid.Column("BookSubCode", "SUB CODE"),
+     grid.Column("Status", "STATUS"),
+     grid.Column("IssueStatus", "ISSUE STATUS"),
+     //grid.Column("ACTIONS", style: "btn btn-default", format: @<text> @Html.ActionLink("View", "Index", "BooksDetail", new { id = item.BookMastID })</text>)
+     grid.Column(columnName: "ACTIONS", format: (item) => Html.ActionLink("EDIT", "EditCopy","BookCopy",  new { id = (int)item.BookID },null))
+                //,grid.Column(columnName: "EDIT", format: (item) => Html.ActionLink("Edit", "EditCopy","BookCopy", new { id = (object)item.BookID} ))
+                )
+            )
+            </div>
+        }
+</div>
+<form method="get">
+    <div class="form-group" >
+        <div style="text-align: left">
+            <input type="submit" name="action:AddCopy" value="Add Copy" class="btn btn-success " />
+        </div>
+    </div>
+</form>
+

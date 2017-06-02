@@ -1,0 +1,49 @@
+﻿@model List<LibraryMVC.Models.LibraryBookIssueListSP_Result>
+@{
+    ViewBag.Title = "Book Issue List";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+
+<h2></h2>
+@using (Html.BeginForm("Index", "Issue", null, FormMethod.Post))
+{
+    <h4 Style="text-align: right; font-family: Corbel; font-size: large;">BOOK ISSUE - LIST</h4>
+    <hr />
+    <table style="width:100%">
+        <tr>
+            <td colspan="2">
+                <input type="text" id="txtSearch"  placeholder="Type here to search..." style="width:100%" class="TextBoxTDBG4" onkeyup="Search()"/>
+                <br />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="divPartialView">
+                    @Html.Partial("~/Views/Issue/IssueList.cshtml", Model)
+                </div>
+            </td>
+        </tr>
+    </table>
+    <script type="text/javascript" >
+        function Search()
+        {
+            var searchval = $("#txtSearch").val();
+            $.ajax(
+                {
+                    type: "POST",
+                    url: "/Issue/SearchGrid",
+                    data: { searchText: searchval },
+                    dataType: "html",
+                    success: function (data) { $("#divPartialView").html(data); }
+
+                }
+                );
+        }
+    </script>
+    <div class="form-group">
+        <div style="text-align: left">
+            <input type="submit" name="action:Add" value="New Issue" class="btn btn-success " />
+        </div>
+    </div>
+}
+

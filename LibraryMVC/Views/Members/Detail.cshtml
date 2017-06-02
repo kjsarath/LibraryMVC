@@ -1,0 +1,140 @@
+﻿@model LibraryMVC.Models.LibraryMemberDetailsSP_Result 
+@{
+    ViewBag.Title = "Member Detail";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+
+<h2></h2>
+@section head
+{
+    <script src="../../Scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+}
+<div style="font-family:Calibri ;font-size:10px">
+    <table style="width:100%">
+        <tr>
+            <td colspan="4" Style="text-align: right; font-family: Corbel; font-size: large;">
+                DETAILS OF MEMBER
+                <hr />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="SubHead">MEMBER DETAILS</td>
+            @Html.HiddenFor(model => model.ID)
+            @Html.HiddenFor(model => model.AccountID)
+        </tr>
+        <tr>
+            <td align="right" class="tdStyle" style="width: 10%">Code</td>
+            <td class="TextBoxTDBG2" style="width: 40%">
+                <span class="dxeBase_DevEx" id="Span1"></span>
+                @Html.DisplayFor(model => model.Code )
+            </td>
+            <td style="width:10%"></td>
+            <td style="width: 40%">
+                <span class="dxeBase_DevEx" id="Span15"></span>
+            </td>
+        </tr>
+        <tr>
+            <td align="right" class="tdStyle" style="width: 10%; height: 24px;">Name</td>
+            <td colspan="3" class="TextBoxTDBG2" style="height: 24px">
+                <span class="dxeBase_DevEx" id="ctl00_MainContent_ASPxCallbackPanelMain_txtCode"></span>
+                @Html.DisplayFor(model => model.Name)
+            </td>
+        </tr>
+        <tr>
+            <td align="right" class="tdStyle" style="width: 10%">Category</td>
+            <td  class="TextBoxTDBG2" style="width: 40%">
+                <span class="dxeBase_DevEx" id="Span2"></span>
+                @Html.DisplayFor(model => model.Category)
+            </td>
+            <td align="right" class="tdStyle" style="width: 10%">Date of Join</td>
+            <td class="TextBoxTDBG2" style="width: 40%">
+                <span class="dxeBase_DevEx" id="Span2"></span>
+                @Html.DisplayFor(model => model.JoiningDate)
+            </td>
+        </tr>
+        <tr>
+            <td align="right" class="tdStyle" style="width: 10%">Status</td>
+            <td class="TextBoxTDBG2" style="width: 40%">
+                <span class="dxeBase_DevEx" id="Span3"></span>
+                @Html.DisplayFor(model => model.Status)
+            </td>
+            <td style="width:10%"></td>
+            <td style="width: 40%">
+                <span class="dxeBase_DevEx" id="Span15"></span>
+            </td>
+        </tr>
+        <tr>
+            <td align="right" class="tdStyle" style="width: 10%">Remarks</td>
+            <td colspan="3" class="TextBoxTDBG2">
+                <span class="dxeBase_DevEx" id="Span4"></span>
+                @Html.DisplayFor(model => model.Remarks)
+            </td>
+
+        </tr>
+        <tr>
+            <td colspan="4" class="SubHead">CONTACT DETAILS</td>
+        </tr>
+        <tr>
+            <td align="right" class="tdStyle" style="width: 10%">Mobile</td>
+            <td class="TextBoxTDBG2" style="width: 40%">
+                <span class="dxeBase_DevEx" id="Span5"></span>
+                @Html.DisplayFor(model => model.ContactNum )
+            </td>
+            <td class="tdStyle" style="width:10%">Mobile Alt</td>
+            <td class="TextBoxTDBG2" style="width: 40%">
+                <span class="dxeBase_DevEx" id="Span6"></span>
+                @Html.DisplayFor(model => model.ContactNumAlt )
+            </td>
+        </tr>
+        <tr>
+            <td align="right" class="tdStyle" style="width: 10%">EMail</td>
+            <td class="TextBoxTDBG2" style="width: 40%">
+                <span class="dxeBase_DevEx" id="Span7"></span>
+                @Html.DisplayFor(model => model.ContactEmail )
+            </td>
+            <td style="width:10%"></td>
+            <td style="width: 40%">
+                <span class="dxeBase_DevEx" id="Span15"></span>
+            </td>
+        </tr>
+        <tr>
+            <td align="right" class="tdStyle" style="width: 10%">Address 1</td>
+            <td colspan="3" class="TextBoxTDBG2" >
+                <span class="dxeBase_DevEx" id="Span9"></span>
+                @Html.DisplayFor(model => model.Address1)
+            </td>
+        </tr>
+        <tr>
+            <td align="right" class="tdStyle" style="width: 10%">Address 2</td>
+            <td colspan="3" class="TextBoxTDBG2" style="width: 35%">
+                <span class="dxeBase_DevEx" id="Span11"></span>
+                @Html.DisplayFor(model => model.Address2 )
+            </td>
+            
+        </tr>
+        
+    </table>
+</div>
+<br />
+<table style="width:100%">
+    <tr>
+        <td style="width:60px">
+            <form method="get">
+                <div class="form-group">
+                    <div style="text-align: left">
+                        <input type="submit" name="action:Edit" value="Edit" class="btn btn-success " />
+                    </div>
+                </div>
+            </form>
+        </td>
+        <td>
+            <form method="post">
+                <div class="form-group">
+                    <div style="text-align: left">
+                        <input type="submit" name="action:Back" value="Back To List" class="btn btn-primary " />
+                    </div>
+                </div>
+            </form>
+        </td>
+    </tr>
+</table>

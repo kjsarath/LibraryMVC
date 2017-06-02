@@ -1,0 +1,345 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LoginModelStoreContainer" CdmEntityContainer="OrisonSystemSCHOOLEntities">
+    <EntitySetMapping Name="PortalUsers">
+      <EntityTypeMapping TypeName="LoginModel.PortalUser">
+        <MappingFragment StoreEntitySet="PortalUsers">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="Section" ColumnName="Section" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ClassStatus" ColumnName="ClassStatus" />
+          <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
+          <ScalarProperty Name="MDate" ColumnName="MDate" />
+          <ScalarProperty Name="UserIP" ColumnName="UserIP" />
+          <ScalarProperty Name="UserInfo" ColumnName="UserInfo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="School_LibraryBookMaster">
+      <EntityTypeMapping TypeName="LoginModel.School_LibraryBookMaster">
+        <MappingFragment StoreEntitySet="School_LibraryBookMaster">
+          <ScalarProperty Name="dateofentry" ColumnName="dateofentry" />
+          <ScalarProperty Name="img" ColumnName="img" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="language" ColumnName="language" />
+          <ScalarProperty Name="CallNo" ColumnName="CallNo" />
+          <ScalarProperty Name="GMD" ColumnName="GMD" />
+          <ScalarProperty Name="ArticleCategory" ColumnName="ArticleCategory" />
+          <ScalarProperty Name="ArticleType" ColumnName="ArticleType" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="Callnoold" ColumnName="Callnoold" />
+          <ScalarProperty Name="BillNoold" ColumnName="BillNoold" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Volume" ColumnName="Volume" />
+          <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+          <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+          <ScalarProperty Name="Publisher" ColumnName="Publisher" />
+          <ScalarProperty Name="Copies" ColumnName="Copies" />
+          <ScalarProperty Name="Series" ColumnName="Series" />
+          <ScalarProperty Name="Author2" ColumnName="Author2" />
+          <ScalarProperty Name="Author1" ColumnName="Author1" />
+          <ScalarProperty Name="SubTitle" ColumnName="SubTitle" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="CallNo2" ColumnName="CallNo2" />
+          <ScalarProperty Name="CallNo1P3" ColumnName="CallNo1P3" />
+          <ScalarProperty Name="CallNo1P2" ColumnName="CallNo1P2" />
+          <ScalarProperty Name="CallNo1P1" ColumnName="CallNo1P1" />
+          <ScalarProperty Name="BookCode" ColumnName="BookCode" />
+          <ScalarProperty Name="BookMastID" ColumnName="BookMastID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="LibraryBookMasterListSP" FunctionName="LoginModel.Store.LibraryBookMasterListSP">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LoginModel.LibraryBookMasterListSP_Result">
+          <ScalarProperty Name="BookMastID" ColumnName="BookMastID" />
+          <ScalarProperty Name="BOOK_CODE" ColumnName="BOOK CODE" />
+          <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+          <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+          <ScalarProperty Name="DATE_OF_ENTRY" ColumnName="DATE OF ENTRY" />
+          <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+          <ScalarProperty Name="BInt" ColumnName="BInt" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="School_LibraryBookDetails">
+      <EntityTypeMapping TypeName="LoginModel.School_LibraryBookDetails">
+        <MappingFragment StoreEntitySet="School_LibraryBookDetails">
+          <ScalarProperty Name="StockStatus" ColumnName="StockStatus" />
+          <ScalarProperty Name="BookLanguage" ColumnName="BookLanguage" />
+          <ScalarProperty Name="PlaceOfPublication" ColumnName="PlaceOfPublication" />
+          <ScalarProperty Name="Shift" ColumnName="Shift" />
+          <ScalarProperty Name="category" ColumnName="category" />
+          <ScalarProperty Name="billno" ColumnName="billno" />
+          <ScalarProperty Name="Callnoold" ColumnName="Callnoold" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+          <ScalarProperty Name="IssueStatus" ColumnName="IssueStatus" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="CostinDhs" ColumnName="CostinDhs" />
+          <ScalarProperty Name="InOut" ColumnName="InOut" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
+          <ScalarProperty Name="Currency" ColumnName="Currency" />
+          <ScalarProperty Name="BasicValue" ColumnName="BasicValue" />
+          <ScalarProperty Name="PublishedYear" ColumnName="PublishedYear" />
+          <ScalarProperty Name="PageNo" ColumnName="PageNo" />
+          <ScalarProperty Name="Edition" ColumnName="Edition" />
+          <ScalarProperty Name="AccessionNo" ColumnName="AccessionNo" />
+          <ScalarProperty Name="CallNo3" ColumnName="CallNo3" />
+          <ScalarProperty Name="BookSubCode" ColumnName="BookSubCode" />
+          <ScalarProperty Name="BookMastID" ColumnName="BookMastID" />
+          <ScalarProperty Name="BookID" ColumnName="BookID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="LoginModel.Accounts">
+        <MappingFragment StoreEntitySet="Accounts">
+          <ScalarProperty Name="ShowRow" ColumnName="ShowRow" />
+          <ScalarProperty Name="SortField" ColumnName="SortField" />
+          <ScalarProperty Name="InVisible" ColumnName="InVisible" />
+          <ScalarProperty Name="CCID" ColumnName="CCID" />
+          <ScalarProperty Name="AOrderNo" ColumnName="AOrderNo" />
+          <ScalarProperty Name="ModifiedUser" ColumnName="ModifiedUser" />
+          <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="Currency" ColumnName="Currency" />
+          <ScalarProperty Name="UserTrackID" ColumnName="UserTrackID" />
+          <ScalarProperty Name="Editable" ColumnName="Editable" />
+          <ScalarProperty Name="InActive" ColumnName="InActive" />
+          <ScalarProperty Name="AllowEntry" ColumnName="AllowEntry" />
+          <ScalarProperty Name="ISDefault" ColumnName="ISDefault" />
+          <ScalarProperty Name="ShowChild" ColumnName="ShowChild" />
+          <ScalarProperty Name="AccCategory" ColumnName="AccCategory" />
+          <ScalarProperty Name="SubGroup" ColumnName="SubGroup" />
+          <ScalarProperty Name="AccountGroup" ColumnName="AccountGroup" />
+          <ScalarProperty Name="FinalAccount" ColumnName="FinalAccount" />
+          <ScalarProperty Name="VoucherEntry" ColumnName="VoucherEntry" />
+          <ScalarProperty Name="ParentLevel" ColumnName="ParentLevel" />
+          <ScalarProperty Name="Parent" ColumnName="Parent" />
+          <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+          <ScalarProperty Name="AccountCode" ColumnName="AccountCode" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="LibraryMembersListSP" FunctionName="LoginModel.Store.LibraryMembersListSP">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LoginModel.LibraryMembersListSP_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+          <ScalarProperty Name="Member_Code" ColumnName="Member Code" />
+          <ScalarProperty Name="Member_Name" ColumnName="Member Name" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Mobile_Alt" ColumnName="Mobile Alt" />
+          <ScalarProperty Name="EMail" ColumnName="EMail" />
+          <ScalarProperty Name="Joined_Date" ColumnName="Joined Date" />
+          <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+          <ScalarProperty Name="Address1" ColumnName="Address1" />
+          <ScalarProperty Name="Address2" ColumnName="Address2" />
+          <ScalarProperty Name="Area" ColumnName="Area" />
+          <ScalarProperty Name="Emirates" ColumnName="Emirates" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="Library_Members">
+      <EntityTypeMapping TypeName="LoginModel.Library_Members">
+        <MappingFragment StoreEntitySet="Library_Members">
+          <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Emirates" ColumnName="Emirates" />
+          <ScalarProperty Name="Area" ColumnName="Area" />
+          <ScalarProperty Name="Address2" ColumnName="Address2" />
+          <ScalarProperty Name="Address1" ColumnName="Address1" />
+          <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+          <ScalarProperty Name="JoiningDate" ColumnName="JoiningDate" />
+          <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
+          <ScalarProperty Name="ContactNumAlt" ColumnName="ContactNumAlt" />
+          <ScalarProperty Name="ContactNum" ColumnName="ContactNum" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="LibraryMemberDetailsSP" FunctionName="LoginModel.Store.LibraryMemberDetailsSP">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LoginModel.LibraryMemberDetailsSP_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="ContactNum" ColumnName="ContactNum" />
+          <ScalarProperty Name="ContactNumAlt" ColumnName="ContactNumAlt" />
+          <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
+          <ScalarProperty Name="JoiningDate" ColumnName="JoiningDate" />
+          <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+          <ScalarProperty Name="Address1" ColumnName="Address1" />
+          <ScalarProperty Name="Address2" ColumnName="Address2" />
+          <ScalarProperty Name="Area" ColumnName="Area" />
+          <ScalarProperty Name="Emirates" ColumnName="Emirates" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="LibrarySubMasterDetailsSP" FunctionName="LoginModel.Store.LibrarySubMasterDetailsSP">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LoginModel.LibrarySubMasterDetailsSP_Result">
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="LibrarySubMasterListSP" FunctionName="LoginModel.Store.LibrarySubMasterListSP">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LoginModel.LibrarySubMasterListSP_Result">
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="School_LibraryCategoryMaster">
+      <EntityTypeMapping TypeName="LoginModel.School_LibraryCategoryMaster">
+        <MappingFragment StoreEntitySet="School_LibraryCategoryMaster">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="LibraryBookIssueListSP" FunctionName="LoginModel.Store.LibraryBookIssueListSP">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LoginModel.LibraryBookIssueListSP_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IssueNo" ColumnName="IssueNo" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="AccessionNo" ColumnName="AccessionNo" />
+          <ScalarProperty Name="SubName" ColumnName="SubName" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+          <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+          <ScalarProperty Name="MemberType" ColumnName="MemberType" />
+          <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+          <ScalarProperty Name="SubTitle" ColumnName="SubTitle" />
+          <ScalarProperty Name="Author1" ColumnName="Author1" />
+          <ScalarProperty Name="Author2" ColumnName="Author2" />
+          <ScalarProperty Name="Publisher" ColumnName="Publisher" />
+          <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+          <ScalarProperty Name="BookSubCode" ColumnName="BookSubCode" />
+          <ScalarProperty Name="BookCode" ColumnName="BookCode" />
+          <ScalarProperty Name="CallNo1P3" ColumnName="CallNo1P3" />
+          <ScalarProperty Name="CallNo2" ColumnName="CallNo2" />
+          <ScalarProperty Name="CallNo3" ColumnName="CallNo3" />
+          <ScalarProperty Name="MemberName" ColumnName="MemberName" />
+          <ScalarProperty Name="AccCategory" ColumnName="AccCategory" />
+          <ScalarProperty Name="IssueStatus" ColumnName="IssueStatus" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="NoOfDays" ColumnName="NoOfDays" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="AccountCode" ColumnName="AccountCode" />
+          <ScalarProperty Name="issuedstatus" ColumnName="issuedstatus" />
+          <ScalarProperty Name="Class" ColumnName="Class" />
+          <ScalarProperty Name="Division" ColumnName="Division" />
+          <ScalarProperty Name="photo" ColumnName="photo" />
+          <ScalarProperty Name="Shift" ColumnName="Shift" />
+          <ScalarProperty Name="MaxDays" ColumnName="MaxDays" />
+          <ScalarProperty Name="Fine" ColumnName="Fine" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="LibraryGetIssueDetails" FunctionName="LoginModel.Store.LibraryGetIssueDetails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LoginModel.LibraryGetIssueDetails_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="SubName" ColumnName="SubName" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+          <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+          <ScalarProperty Name="MemberType" ColumnName="MemberType" />
+          <ScalarProperty Name="AccessionNo" ColumnName="AccessionNo" />
+          <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+          <ScalarProperty Name="SubTitle" ColumnName="SubTitle" />
+          <ScalarProperty Name="Author1" ColumnName="Author1" />
+          <ScalarProperty Name="Author2" ColumnName="Author2" />
+          <ScalarProperty Name="Publisher" ColumnName="Publisher" />
+          <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+          <ScalarProperty Name="BookSubCode" ColumnName="BookSubCode" />
+          <ScalarProperty Name="BookID" ColumnName="BookID" />
+          <ScalarProperty Name="BookCode" ColumnName="BookCode" />
+          <ScalarProperty Name="CallNo1P3" ColumnName="CallNo1P3" />
+          <ScalarProperty Name="CallNo2" ColumnName="CallNo2" />
+          <ScalarProperty Name="CallNo" ColumnName="CallNo" />
+          <ScalarProperty Name="CallNo3" ColumnName="CallNo3" />
+          <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+          <ScalarProperty Name="AccCategory" ColumnName="AccCategory" />
+          <ScalarProperty Name="IssueStatus" ColumnName="IssueStatus" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="IssueNo" ColumnName="IssueNo" />
+          <ScalarProperty Name="NoOfDays" ColumnName="NoOfDays" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="AccountCode" ColumnName="AccountCode" />
+          <ScalarProperty Name="issuedstatus" ColumnName="issuedstatus" />
+          <ScalarProperty Name="Class" ColumnName="Class" />
+          <ScalarProperty Name="Division" ColumnName="Division" />
+          <ScalarProperty Name="GRNo" ColumnName="GRNo" />
+          <ScalarProperty Name="uniqueID" ColumnName="uniqueID" />
+          <ScalarProperty Name="photo" ColumnName="photo" />
+          <ScalarProperty Name="Shift" ColumnName="Shift" />
+          <ScalarProperty Name="MaxDays" ColumnName="MaxDays" />
+          <ScalarProperty Name="Fine" ColumnName="Fine" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="School_LibraryIssue">
+      <EntityTypeMapping TypeName="LoginModel.School_LibraryIssue">
+        <MappingFragment StoreEntitySet="School_LibraryIssue">
+          <ScalarProperty Name="BookID" ColumnName="BookID" />
+          <ScalarProperty Name="MaxDays" ColumnName="MaxDays" />
+          <ScalarProperty Name="Shift" ColumnName="Shift" />
+          <ScalarProperty Name="RID" ColumnName="RID" />
+          <ScalarProperty Name="Fine" ColumnName="Fine" />
+          <ScalarProperty Name="Class" ColumnName="Class" />
+          <ScalarProperty Name="IssueStatus" ColumnName="IssueStatus" />
+          <ScalarProperty Name="MemberType" ColumnName="MemberType" />
+          <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+          <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="SubName" ColumnName="SubName" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="AccessionNo" ColumnName="AccessionNo" />
+          <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+          <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+          <ScalarProperty Name="IssueNo" ColumnName="IssueNo" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

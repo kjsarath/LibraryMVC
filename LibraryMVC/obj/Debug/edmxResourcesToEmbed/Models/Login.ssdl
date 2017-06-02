@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LoginModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Accounts">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AccountCode" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="AccountName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Parent" Type="int" />
+    <Property Name="ParentLevel" Type="int" Nullable="false" />
+    <Property Name="VoucherEntry" Type="bit" />
+    <Property Name="FinalAccount" Type="bit" Nullable="false" />
+    <Property Name="AccountGroup" Type="int" Nullable="false" />
+    <Property Name="SubGroup" Type="int" />
+    <Property Name="AccCategory" Type="int" />
+    <Property Name="ShowChild" Type="bit" />
+    <Property Name="ISDefault" Type="bit" />
+    <Property Name="AllowEntry" Type="bit" />
+    <Property Name="InActive" Type="bit" Nullable="false" />
+    <Property Name="Editable" Type="bit" />
+    <Property Name="UserTrackID" Type="bigint" />
+    <Property Name="Currency" Type="int" />
+    <Property Name="BranchID" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedUser" Type="int" />
+    <Property Name="ModifiedUser" Type="int" />
+    <Property Name="AOrderNo" Type="int" />
+    <Property Name="CCID" Type="int" />
+    <Property Name="InVisible" Type="bit" />
+    <Property Name="SortField" Type="decimal" Precision="10" Scale="3" />
+    <Property Name="ShowRow" Type="bit" />
+  </EntityType>
+  <EntityType Name="Library_Members">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Category" Type="nvarchar" MaxLength="100" />
+    <Property Name="ContactNum" Type="nvarchar" MaxLength="100" />
+    <Property Name="ContactNumAlt" Type="nvarchar" MaxLength="100" />
+    <Property Name="ContactEmail" Type="nvarchar(max)" />
+    <Property Name="JoiningDate" Type="smalldatetime" />
+    <Property Name="Nationality" Type="nvarchar" MaxLength="100" />
+    <Property Name="Address1" Type="nvarchar(max)" />
+    <Property Name="Address2" Type="nvarchar(max)" />
+    <Property Name="Area" Type="nvarchar" MaxLength="100" />
+    <Property Name="Emirates" Type="nvarchar" MaxLength="100" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" />
+    <Property Name="Image" Type="varbinary(max)" />
+    <Property Name="Remarks" Type="nvarchar(max)" />
+    <Property Name="AccountID" Type="int" />
+  </EntityType>
+  <EntityType Name="PortalUsers">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AccountID" Type="int" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" />
+    <Property Name="Password" Type="nvarchar" MaxLength="12" Nullable="false" />
+    <Property Name="Category" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Section" Type="nvarchar" MaxLength="50" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ClassStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="ProfileID" Type="int" />
+    <Property Name="MDate" Type="datetime" />
+    <Property Name="UserIP" Type="nvarchar" MaxLength="50" />
+    <Property Name="UserInfo" Type="varbinary" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="School_LibraryBookDetails">
+    <Key>
+      <PropertyRef Name="BookID" />
+    </Key>
+    <Property Name="BookID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BookMastID" Type="int" Nullable="false" />
+    <Property Name="BookSubCode" Type="nvarchar" MaxLength="30" />
+    <Property Name="CallNo3" Type="nvarchar" MaxLength="50" />
+    <Property Name="AccessionNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Edition" Type="nvarchar" MaxLength="50" />
+    <Property Name="PageNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="PublishedYear" Type="nvarchar" MaxLength="50" />
+    <Property Name="BasicValue" Type="money" />
+    <Property Name="Currency" Type="nvarchar" MaxLength="50" />
+    <Property Name="PurchaseDate" Type="nvarchar(max)" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" />
+    <Property Name="Location" Type="nvarchar" MaxLength="50" />
+    <Property Name="InOut" Type="nvarchar" MaxLength="50" />
+    <Property Name="CostinDhs" Type="nvarchar" MaxLength="50" />
+    <Property Name="Remarks" Type="nvarchar(max)" />
+    <Property Name="IssueStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="Barcode" Type="nvarchar" MaxLength="50" />
+    <Property Name="Count" Type="nvarchar" MaxLength="30" />
+    <Property Name="Callnoold" Type="nvarchar" MaxLength="50" />
+    <Property Name="billno" Type="nvarchar" MaxLength="50" />
+    <Property Name="category" Type="nvarchar" MaxLength="50" />
+    <Property Name="Shift" Type="nvarchar" MaxLength="50" />
+    <Property Name="PlaceOfPublication" Type="nvarchar" MaxLength="50" />
+    <Property Name="BookLanguage" Type="nvarchar" MaxLength="50" />
+    <Property Name="StockStatus" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="School_LibraryBookMaster">
+    <Key>
+      <PropertyRef Name="BookMastID" />
+    </Key>
+    <Property Name="BookMastID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BookCode" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="CallNo1P1" Type="nvarchar" MaxLength="7" />
+    <Property Name="CallNo1P2" Type="nvarchar" MaxLength="7" />
+    <Property Name="CallNo1P3" Type="nvarchar" MaxLength="7" />
+    <Property Name="CallNo2" Type="nvarchar" MaxLength="30" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="Title" Type="nvarchar" MaxLength="150" />
+    <Property Name="SubTitle" Type="nvarchar" MaxLength="50" />
+    <Property Name="Author1" Type="nvarchar" MaxLength="50" />
+    <Property Name="Author2" Type="nvarchar" MaxLength="50" />
+    <Property Name="Series" Type="nvarchar" MaxLength="50" />
+    <Property Name="Copies" Type="nvarchar" MaxLength="30" />
+    <Property Name="Publisher" Type="nvarchar" MaxLength="50" />
+    <Property Name="ISBN" Type="nvarchar" MaxLength="50" />
+    <Property Name="Barcode" Type="nvarchar" MaxLength="30" />
+    <Property Name="Volume" Type="nvarchar" MaxLength="30" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="150" />
+    <Property Name="BillNoold" Type="nvarchar" MaxLength="50" />
+    <Property Name="Callnoold" Type="nvarchar" MaxLength="50" />
+    <Property Name="Category" Type="nvarchar" MaxLength="50" />
+    <Property Name="ArticleType" Type="nvarchar" MaxLength="50" />
+    <Property Name="ArticleCategory" Type="nvarchar" MaxLength="50" />
+    <Property Name="GMD" Type="nvarchar" MaxLength="50" />
+    <Property Name="CallNo" Type="nvarchar" MaxLength="150" />
+    <Property Name="language" Type="nvarchar" MaxLength="50" />
+    <Property Name="description" Type="nvarchar(max)" />
+    <Property Name="img" Type="image" />
+    <Property Name="dateofentry" Type="datetime" />
+  </EntityType>
+  <EntityType Name="School_LibraryCategoryMaster">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Category" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="School_LibraryIssue">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IssueNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="FromDate" Type="smalldatetime" />
+    <Property Name="ToDate" Type="smalldatetime" />
+    <Property Name="AccessionNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Title" Type="nvarchar(max)" />
+    <Property Name="SubName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Category" Type="nvarchar" MaxLength="50" />
+    <Property Name="IssueDate" Type="smalldatetime" />
+    <Property Name="MemberID" Type="bigint" />
+    <Property Name="MemberType" Type="nvarchar" MaxLength="50" />
+    <Property Name="IssueStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="Class" Type="nchar" MaxLength="10" />
+    <Property Name="Fine" Type="money" />
+    <Property Name="RID" Type="int" />
+    <Property Name="Shift" Type="nvarchar" MaxLength="50" />
+    <Property Name="MaxDays" Type="int" />
+    <Property Name="BookID" Type="int" />
+  </EntityType>
+  <Association Name="FK_Accounts_Accounts">
+    <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
+    <End Role="Accounts1" Type="Self.Accounts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Accounts1">
+        <PropertyRef Name="Parent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_School_LibraryBookDetails_School_LibraryBookMaster">
+    <End Role="School_LibraryBookMaster" Type="Self.School_LibraryBookMaster" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="School_LibraryBookDetails" Type="Self.School_LibraryBookDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="School_LibraryBookMaster">
+        <PropertyRef Name="BookMastID" />
+      </Principal>
+      <Dependent Role="School_LibraryBookDetails">
+        <PropertyRef Name="BookMastID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="LibraryBookIssueListSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AcademicYear" Type="nvarchar" Mode="In" />
+    <Parameter Name="Shift" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="LibraryBookMasterListSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="LibraryGetIssueDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AcademicYear" Type="nvarchar" Mode="In" />
+    <Parameter Name="Shift" Type="nvarchar" Mode="In" />
+    <Parameter Name="IssueID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="LibraryMemberDetailsSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MemberID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="LibraryMembersListSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="LibrarySubMasterDetailsSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="LibrarySubMasterListSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SHead" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <EntityContainer Name="LoginModelStoreContainer">
+    <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Library_Members" EntityType="Self.Library_Members" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PortalUsers" EntityType="Self.PortalUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="School_LibraryBookDetails" EntityType="Self.School_LibraryBookDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="School_LibraryBookMaster" EntityType="Self.School_LibraryBookMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="School_LibraryCategoryMaster" EntityType="Self.School_LibraryCategoryMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="School_LibraryIssue" EntityType="Self.School_LibraryIssue" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Accounts_Accounts" Association="Self.FK_Accounts_Accounts">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="Accounts1" EntitySet="Accounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_School_LibraryBookDetails_School_LibraryBookMaster" Association="Self.FK_School_LibraryBookDetails_School_LibraryBookMaster">
+      <End Role="School_LibraryBookMaster" EntitySet="School_LibraryBookMaster" />
+      <End Role="School_LibraryBookDetails" EntitySet="School_LibraryBookDetails" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

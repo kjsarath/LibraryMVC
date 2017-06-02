@@ -1,0 +1,375 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LoginModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="PortalUser">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AccountID" Type="Int32" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Section" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ClassStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ProfileID" Type="Int32" />
+    <Property Name="MDate" Type="DateTime" Precision="3" />
+    <Property Name="UserIP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserInfo" Type="Binary" MaxLength="500" FixedLength="false" />
+  </EntityType>
+  <EntityContainer Name="OrisonSystemSCHOOLEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="PortalUsers" EntityType="Self.PortalUser" />
+    <EntitySet Name="School_LibraryBookMaster" EntityType="LoginModel.School_LibraryBookMaster" />
+    <FunctionImport Name="LibraryBookMasterListSP" ReturnType="Collection(LoginModel.LibraryBookMasterListSP_Result)" />
+    <EntitySet Name="School_LibraryBookDetails" EntityType="LoginModel.School_LibraryBookDetails" />
+    <AssociationSet Name="FK_School_LibraryBookDetails_School_LibraryBookMaster" Association="LoginModel.FK_School_LibraryBookDetails_School_LibraryBookMaster">
+      <End Role="School_LibraryBookMaster" EntitySet="School_LibraryBookMaster" />
+      <End Role="School_LibraryBookDetails" EntitySet="School_LibraryBookDetails" />
+    </AssociationSet>
+    <EntitySet Name="Accounts" EntityType="LoginModel.Accounts" />
+    <AssociationSet Name="FK_Accounts_Accounts" Association="LoginModel.FK_Accounts_Accounts">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="Accounts1" EntitySet="Accounts" />
+    </AssociationSet>
+    <FunctionImport Name="LibraryMembersListSP" ReturnType="Collection(LoginModel.LibraryMembersListSP_Result)" />
+    <EntitySet Name="Library_Members" EntityType="LoginModel.Library_Members" />
+    <FunctionImport Name="LibraryMemberDetailsSP" ReturnType="Collection(LoginModel.LibraryMemberDetailsSP_Result)">
+      <Parameter Name="MemberID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="LibrarySubMasterDetailsSP" ReturnType="Collection(LoginModel.LibrarySubMasterDetailsSP_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="LibrarySubMasterListSP" ReturnType="Collection(LoginModel.LibrarySubMasterListSP_Result)">
+      <Parameter Name="SHead" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="School_LibraryCategoryMaster" EntityType="LoginModel.School_LibraryCategoryMaster" />
+    <FunctionImport Name="LibraryBookIssueListSP" ReturnType="Collection(LoginModel.LibraryBookIssueListSP_Result)">
+      <Parameter Name="AcademicYear" Mode="In" Type="String" />
+      <Parameter Name="Shift" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="LibraryGetIssueDetails" ReturnType="Collection(LoginModel.LibraryGetIssueDetails_Result)">
+      <Parameter Name="AcademicYear" Mode="In" Type="String" />
+      <Parameter Name="Shift" Mode="In" Type="String" />
+      <Parameter Name="IssueID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="School_LibraryIssue" EntityType="LoginModel.School_LibraryIssue" />
+  </EntityContainer>
+  <EntityType Name="School_LibraryBookMaster">
+    <Key>
+      <PropertyRef Name="BookMastID" />
+    </Key>
+    <Property Name="BookMastID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BookCode" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="CallNo1P1" Type="String" MaxLength="7" FixedLength="false" Unicode="true" />
+    <Property Name="CallNo1P2" Type="String" MaxLength="7" FixedLength="false" Unicode="true" />
+    <Property Name="CallNo1P3" Type="String" MaxLength="7" FixedLength="false" Unicode="true" />
+    <Property Name="CallNo2" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Title" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="SubTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Author1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Author2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Series" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Copies" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Publisher" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ISBN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Barcode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Volume" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Remarks" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="BillNoold" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Callnoold" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ArticleType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ArticleCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="GMD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CallNo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="img" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="dateofentry" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="School_LibraryBookDetails" Relationship="LoginModel.FK_School_LibraryBookDetails_School_LibraryBookMaster" FromRole="School_LibraryBookMaster" ToRole="School_LibraryBookDetails" />
+  </EntityType>
+  <ComplexType Name="LibraryBookMasterListSP_Result">
+    <Property Type="Int32" Name="BookMastID" Nullable="false" />
+    <Property Type="String" Name="BOOK_CODE" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="TITLE" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="ISBN" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="DATE_OF_ENTRY" Nullable="true" Precision="23" />
+    <Property Type="String" Name="TYPE" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="BInt" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="School_LibraryBookDetails">
+    <Key>
+      <PropertyRef Name="BookID" />
+    </Key>
+    <Property Name="BookID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BookMastID" Type="Int32" Nullable="false" />
+    <Property Name="BookSubCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="CallNo3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AccessionNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Edition" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PageNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PublishedYear" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BasicValue" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Currency" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PurchaseDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="InOut" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CostinDhs" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IssueStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Barcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Count" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Callnoold" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="billno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Shift" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PlaceOfPublication" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BookLanguage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="StockStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="School_LibraryBookMaster" Relationship="LoginModel.FK_School_LibraryBookDetails_School_LibraryBookMaster" FromRole="School_LibraryBookDetails" ToRole="School_LibraryBookMaster" />
+  </EntityType>
+  <Association Name="FK_School_LibraryBookDetails_School_LibraryBookMaster">
+    <End Type="LoginModel.School_LibraryBookMaster" Role="School_LibraryBookMaster" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="LoginModel.School_LibraryBookDetails" Role="School_LibraryBookDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="School_LibraryBookMaster">
+        <PropertyRef Name="BookMastID" />
+      </Principal>
+      <Dependent Role="School_LibraryBookDetails">
+        <PropertyRef Name="BookMastID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Accounts">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AccountCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="AccountName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Parent" Type="Int32" />
+    <Property Name="ParentLevel" Type="Int32" Nullable="false" />
+    <Property Name="VoucherEntry" Type="Boolean" />
+    <Property Name="FinalAccount" Type="Boolean" Nullable="false" />
+    <Property Name="AccountGroup" Type="Int32" Nullable="false" />
+    <Property Name="SubGroup" Type="Int32" />
+    <Property Name="AccCategory" Type="Int32" />
+    <Property Name="ShowChild" Type="Boolean" />
+    <Property Name="ISDefault" Type="Boolean" />
+    <Property Name="AllowEntry" Type="Boolean" />
+    <Property Name="InActive" Type="Boolean" Nullable="false" />
+    <Property Name="Editable" Type="Boolean" />
+    <Property Name="UserTrackID" Type="Int64" />
+    <Property Name="Currency" Type="Int32" />
+    <Property Name="BranchID" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedUser" Type="Int32" />
+    <Property Name="ModifiedUser" Type="Int32" />
+    <Property Name="AOrderNo" Type="Int32" />
+    <Property Name="CCID" Type="Int32" />
+    <Property Name="InVisible" Type="Boolean" />
+    <Property Name="SortField" Type="Decimal" Precision="10" Scale="3" />
+    <Property Name="ShowRow" Type="Boolean" />
+    <NavigationProperty Name="Accounts1" Relationship="LoginModel.FK_Accounts_Accounts" FromRole="Accounts" ToRole="Accounts1" />
+    <NavigationProperty Name="Accounts2" Relationship="LoginModel.FK_Accounts_Accounts" FromRole="Accounts1" ToRole="Accounts" />
+  </EntityType>
+  <Association Name="FK_Accounts_Accounts">
+    <End Type="LoginModel.Accounts" Role="Accounts" Multiplicity="0..1" />
+    <End Type="LoginModel.Accounts" Role="Accounts1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Accounts1">
+        <PropertyRef Name="Parent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="LibraryMembersListSP_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="Int32" Name="AccountID" Nullable="true" />
+    <Property Type="String" Name="Member_Code" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Member_Name" Nullable="true" />
+    <Property Type="String" Name="Category" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Mobile" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Mobile_Alt" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="EMail" Nullable="true" />
+    <Property Type="DateTime" Name="Joined_Date" Nullable="true" Precision="16" />
+    <Property Type="String" Name="Nationality" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Address1" Nullable="true" />
+    <Property Type="String" Name="Address2" Nullable="true" />
+    <Property Type="String" Name="Area" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Emirates" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Status" Nullable="true" MaxLength="50" />
+    <Property Type="Binary" Name="Image" Nullable="true" />
+    <Property Type="String" Name="Remarks" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="Library_Members">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Category" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNum" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNumAlt" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ContactEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="JoiningDate" Type="DateTime" Precision="0" />
+    <Property Name="Nationality" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Address1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Address2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Area" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Emirates" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AccountID" Type="Int32" />
+  </EntityType>
+  <ComplexType Name="LibraryMemberDetailsSP_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="Int32" Name="AccountID" Nullable="true" />
+    <Property Type="String" Name="Code" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Name" Nullable="true" />
+    <Property Type="String" Name="Category" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="ContactNum" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="ContactNumAlt" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="ContactEmail" Nullable="true" />
+    <Property Type="DateTime" Name="JoiningDate" Nullable="true" Precision="16" />
+    <Property Type="String" Name="Nationality" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Address1" Nullable="true" />
+    <Property Type="String" Name="Address2" Nullable="true" />
+    <Property Type="String" Name="Area" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Emirates" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Status" Nullable="true" MaxLength="50" />
+    <Property Type="Binary" Name="Image" Nullable="true" />
+    <Property Type="String" Name="Remarks" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="LibrarySubMasterDetailsSP_Result">
+    <Property Type="String" Name="Category" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Description" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="LibrarySubMasterListSP_Result">
+    <Property Type="String" Name="Category" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Description" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="School_LibraryCategoryMaster">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Category" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <ComplexType Name="LibraryBookIssueListSP_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="IssueNo" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="FromDate" Nullable="true" Precision="16" />
+    <Property Type="DateTime" Name="DueDate" Nullable="true" Precision="16" />
+    <Property Type="String" Name="Title" Nullable="true" />
+    <Property Type="String" Name="AccessionNo" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SubName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Category" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="IssueDate" Nullable="true" Precision="16" />
+    <Property Type="Int64" Name="MemberID" Nullable="true" />
+    <Property Type="String" Name="MemberType" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Barcode" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SubTitle" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Author1" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Author2" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Publisher" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ISBN" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="BookSubCode" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="BookCode" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="CallNo1P3" Nullable="true" MaxLength="7" />
+    <Property Type="String" Name="CallNo2" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="CallNo3" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="MemberName" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="AccCategory" Nullable="true" />
+    <Property Type="String" Name="IssueStatus" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Status" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="NoOfDays" Nullable="true" />
+    <Property Type="String" Name="Description" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="AccountCode" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="issuedstatus" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Class" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="Division" Nullable="true" MaxLength="10" />
+    <Property Type="Binary" Name="photo" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="Shift" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="MaxDays" Nullable="true" />
+    <Property Type="Decimal" Name="Fine" Nullable="true" Precision="19" />
+  </ComplexType>
+  <ComplexType Name="LibraryGetIssueDetails_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="DateTime" Name="FromDate" Nullable="true" Precision="16" />
+    <Property Type="DateTime" Name="ToDate" Nullable="true" Precision="16" />
+    <Property Type="String" Name="Title" Nullable="true" />
+    <Property Type="String" Name="SubName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Category" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="IssueDate" Nullable="true" Precision="16" />
+    <Property Type="Int64" Name="MemberID" Nullable="true" />
+    <Property Type="String" Name="MemberType" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="AccessionNo" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Barcode" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SubTitle" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Author1" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Author2" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Publisher" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ISBN" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="BookSubCode" Nullable="true" MaxLength="30" />
+    <Property Type="Int32" Name="BookID" Nullable="true" />
+    <Property Type="String" Name="BookCode" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="CallNo1P3" Nullable="true" MaxLength="7" />
+    <Property Type="String" Name="CallNo2" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="CallNo" Nullable="false" MaxLength="69" />
+    <Property Type="String" Name="CallNo3" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="AccountName" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="AccCategory" Nullable="true" />
+    <Property Type="String" Name="IssueStatus" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Status" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="IssueNo" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="NoOfDays" Nullable="true" />
+    <Property Type="String" Name="Description" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="AccountCode" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="issuedstatus" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Class" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="Division" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="GRNo" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="uniqueID" Nullable="true" MaxLength="50" />
+    <Property Type="Binary" Name="photo" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="Shift" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="MaxDays" Nullable="true" />
+    <Property Type="Decimal" Name="Fine" Nullable="true" Precision="19" />
+  </ComplexType>
+  <EntityType Name="School_LibraryIssue">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IssueNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FromDate" Type="DateTime" Precision="0" />
+    <Property Name="ToDate" Type="DateTime" Precision="0" />
+    <Property Name="AccessionNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SubName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IssueDate" Type="DateTime" Precision="0" />
+    <Property Name="MemberID" Type="Int64" />
+    <Property Name="MemberType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IssueStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Class" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Fine" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="RID" Type="Int32" />
+    <Property Name="Shift" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MaxDays" Type="Int32" />
+    <Property Name="BookID" Type="Int32" />
+  </EntityType>
+</Schema>
