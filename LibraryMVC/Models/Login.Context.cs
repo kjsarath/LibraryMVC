@@ -101,5 +101,23 @@ namespace LibraryMVC.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LibraryGetIssueDetails_Result>("LibraryGetIssueDetails", academicYearParameter, shiftParameter, issueIDParameter);
         }
+    
+        public virtual ObjectResult<LibraryBookMasterDetailsSP_Result> LibraryBookMasterDetailsSP(Nullable<int> iD)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LibraryBookMasterDetailsSP_Result>("LibraryBookMasterDetailsSP", iDParameter);
+        }
+    
+        public virtual ObjectResult<LibraryBookCopyDetailsSP_Result> LibraryBookCopyDetailsSP(Nullable<int> iD)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LibraryBookCopyDetailsSP_Result>("LibraryBookCopyDetailsSP", iDParameter);
+        }
     }
 }

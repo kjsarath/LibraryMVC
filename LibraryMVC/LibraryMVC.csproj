@@ -179,7 +179,13 @@
       <DependentUpon>Login.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountsMetaData.cs" />
+    <Compile Include="Models\LibraryBookCopyDetailsSP_Result.cs">
+      <DependentUpon>Login.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\LibraryBookIssueListSP_Result.cs">
+      <DependentUpon>Login.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LibraryBookMasterDetailsSP_Result.cs">
       <DependentUpon>Login.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LibraryBookMasterListSP_Result.cs">
@@ -381,6 +387,8 @@
     <Content Include="Views\Issue\IssueList.cshtml" />
     <Content Include="Views\Issue\Details.cshtml" />
     <Content Include="Views\Issue\Add.cshtml" />
+    <Content Include="Views\Issue\BookSelection.cshtml" />
+    <Content Include="Views\Issue\BookSelectionList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

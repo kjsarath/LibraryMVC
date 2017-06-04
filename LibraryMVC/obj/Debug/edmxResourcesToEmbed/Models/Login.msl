@@ -341,5 +341,83 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="LibraryBookMasterDetailsSP" FunctionName="LoginModel.Store.LibraryBookMasterDetailsSP">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LoginModel.LibraryBookMasterDetailsSP_Result">
+          <ScalarProperty Name="BookMastID" ColumnName="BookMastID" />
+          <ScalarProperty Name="BookCode" ColumnName="BookCode" />
+          <ScalarProperty Name="DateOfEntry" ColumnName="DateOfEntry" />
+          <ScalarProperty Name="CallNo1P1" ColumnName="CallNo1P1" />
+          <ScalarProperty Name="CallNo1P2" ColumnName="CallNo1P2" />
+          <ScalarProperty Name="CallNo1P3" ColumnName="CallNo1P3" />
+          <ScalarProperty Name="CallNo2" ColumnName="CallNo2" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="SubTitle" ColumnName="SubTitle" />
+          <ScalarProperty Name="Author1" ColumnName="Author1" />
+          <ScalarProperty Name="Author2" ColumnName="Author2" />
+          <ScalarProperty Name="Series" ColumnName="Series" />
+          <ScalarProperty Name="Copies" ColumnName="Copies" />
+          <ScalarProperty Name="Publisher" ColumnName="Publisher" />
+          <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+          <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+          <ScalarProperty Name="Volume" ColumnName="Volume" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Language" ColumnName="Language" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Img" ColumnName="Img" />
+          <ScalarProperty Name="CallNo1" ColumnName="CallNo1" />
+          <ScalarProperty Name="CallNoP1P2" ColumnName="CallNoP1P2" />
+          <ScalarProperty Name="Major" ColumnName="Major" />
+          <ScalarProperty Name="Middle" ColumnName="Middle" />
+          <ScalarProperty Name="Minor" ColumnName="Minor" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="ArticleType" ColumnName="ArticleType" />
+          <ScalarProperty Name="ArticleCategory" ColumnName="ArticleCategory" />
+          <ScalarProperty Name="GMD" ColumnName="GMD" />
+          <ScalarProperty Name="CallNo" ColumnName="CallNo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="LibraryBookCopyDetailsSP" FunctionName="LoginModel.Store.LibraryBookCopyDetailsSP">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LoginModel.LibraryBookCopyDetailsSP_Result">
+          <ScalarProperty Name="BookMastID" ColumnName="BookMastID" />
+          <ScalarProperty Name="BookID" ColumnName="BookID" />
+          <ScalarProperty Name="BookCode" ColumnName="BookCode" />
+          <ScalarProperty Name="AccessionNo" ColumnName="AccessionNo" />
+          <ScalarProperty Name="DateOfEntry" ColumnName="DateOfEntry" />
+          <ScalarProperty Name="CallNo1P1" ColumnName="CallNo1P1" />
+          <ScalarProperty Name="CallNo1P2" ColumnName="CallNo1P2" />
+          <ScalarProperty Name="CallNo1P3" ColumnName="CallNo1P3" />
+          <ScalarProperty Name="CallNo2" ColumnName="CallNo2" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="SubTitle" ColumnName="SubTitle" />
+          <ScalarProperty Name="Author1" ColumnName="Author1" />
+          <ScalarProperty Name="Author2" ColumnName="Author2" />
+          <ScalarProperty Name="Series" ColumnName="Series" />
+          <ScalarProperty Name="Copies" ColumnName="Copies" />
+          <ScalarProperty Name="Publisher" ColumnName="Publisher" />
+          <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+          <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+          <ScalarProperty Name="Volume" ColumnName="Volume" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Language" ColumnName="Language" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Img" ColumnName="Img" />
+          <ScalarProperty Name="CallNo1" ColumnName="CallNo1" />
+          <ScalarProperty Name="CallNoP1P2" ColumnName="CallNoP1P2" />
+          <ScalarProperty Name="Major" ColumnName="Major" />
+          <ScalarProperty Name="Middle" ColumnName="Middle" />
+          <ScalarProperty Name="Minor" ColumnName="Minor" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="ArticleType" ColumnName="ArticleType" />
+          <ScalarProperty Name="ArticleCategory" ColumnName="ArticleCategory" />
+          <ScalarProperty Name="GMD" ColumnName="GMD" />
+          <ScalarProperty Name="CallNo" ColumnName="CallNo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

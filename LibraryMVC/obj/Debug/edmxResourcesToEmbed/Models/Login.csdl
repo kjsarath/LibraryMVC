@@ -54,6 +54,12 @@
       <Parameter Name="IssueID" Mode="In" Type="Int32" />
     </FunctionImport>
     <EntitySet Name="School_LibraryIssue" EntityType="LoginModel.School_LibraryIssue" />
+    <FunctionImport Name="LibraryBookMasterDetailsSP" ReturnType="Collection(LoginModel.LibraryBookMasterDetailsSP_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="LibraryBookCopyDetailsSP" ReturnType="Collection(LoginModel.LibraryBookCopyDetailsSP_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="School_LibraryBookMaster">
     <Key>
@@ -372,4 +378,74 @@
     <Property Name="MaxDays" Type="Int32" />
     <Property Name="BookID" Type="Int32" />
   </EntityType>
+  <ComplexType Name="LibraryBookMasterDetailsSP_Result">
+    <Property Type="Int32" Name="BookMastID" Nullable="false" />
+    <Property Type="String" Name="BookCode" Nullable="false" MaxLength="30" />
+    <Property Type="DateTime" Name="DateOfEntry" Nullable="true" Precision="23" />
+    <Property Type="String" Name="CallNo1P1" Nullable="true" MaxLength="7" />
+    <Property Type="String" Name="CallNo1P2" Nullable="true" MaxLength="7" />
+    <Property Type="String" Name="CallNo1P3" Nullable="true" MaxLength="7" />
+    <Property Type="String" Name="CallNo2" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Title" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="SubTitle" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Author1" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Author2" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Series" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Copies" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Publisher" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ISBN" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Barcode" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Volume" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Remarks" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="Language" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Description" Nullable="true" />
+    <Property Type="Binary" Name="Img" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="CallNo1" Nullable="true" MaxLength="7" />
+    <Property Type="String" Name="CallNoP1P2" Nullable="true" MaxLength="38" />
+    <Property Type="String" Name="Major" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Middle" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Minor" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Category" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ArticleType" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ArticleCategory" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="GMD" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="CallNo" Nullable="true" MaxLength="150" />
+  </ComplexType>
+  <ComplexType Name="LibraryBookCopyDetailsSP_Result">
+    <Property Type="Int32" Name="BookMastID" Nullable="false" />
+    <Property Type="Int32" Name="BookID" Nullable="false" />
+    <Property Type="String" Name="BookCode" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="AccessionNo" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="DateOfEntry" Nullable="true" Precision="23" />
+    <Property Type="String" Name="CallNo1P1" Nullable="true" MaxLength="7" />
+    <Property Type="String" Name="CallNo1P2" Nullable="true" MaxLength="7" />
+    <Property Type="String" Name="CallNo1P3" Nullable="true" MaxLength="7" />
+    <Property Type="String" Name="CallNo2" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Type" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Title" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="SubTitle" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Author1" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Author2" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Series" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Copies" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Publisher" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ISBN" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Barcode" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Volume" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Remarks" Nullable="true" />
+    <Property Type="String" Name="Language" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Description" Nullable="true" />
+    <Property Type="Binary" Name="Img" Nullable="true" MaxLength="Max" />
+    <Property Type="String" Name="CallNo1" Nullable="true" MaxLength="7" />
+    <Property Type="String" Name="CallNoP1P2" Nullable="true" MaxLength="38" />
+    <Property Type="String" Name="Major" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Middle" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Minor" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Category" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ArticleType" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ArticleCategory" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="GMD" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="CallNo" Nullable="true" MaxLength="150" />
+  </ComplexType>
 </Schema>

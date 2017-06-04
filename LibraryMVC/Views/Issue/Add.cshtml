@@ -28,30 +28,60 @@
              dataType: "JSON",
              data: { ID: stateId },
              success: function (books) {
-                 $("#Title").val(books.TITLE);
-                 $("#BookCode").val(books.BOOK_CODE);
+                 $("#Title").val(books.Title);
+                 $("#BookCode").val(books.BookCode);
              }
          });
      });
-     $(document).on('change', '#BookCode', function () {
-         var stateId = $('#BookCode').val();
+     
+     $(function () {
+         // Initialize numeric spinner input boxes
+         //$(".numeric-spinner").spinedit();
+         // Initialize modal dialog
+         // attach modal-container bootstrap attributes to links with .modal-link class.
+         // when a link is clicked with these attributes, bootstrap will display the href content in a modal dialog.
+         $('body').on('click', '.modal-link', function (e) {
+             e.preventDefault();
+             $(this).attr('data-target', '#modal-container');
+             $(this).attr('data-toggle', 'modal');
+         });
+         // Attach listener to .modal-close-btn's so that when the button is pressed the modal dialog disappears
+         $('body').on('click', '.modal-close-btn', function () {
+             $('#modal-container').modal('hide');
+         });
+         //clear modal cache, so that new content can be loaded
+         $('#modal-container').on('hidden.bs.modal', function () {
+             $(this).removeData('bs.modal');
+         });
+         $('#CancelModal').on('click', function () {
+             return false;
+         });
+     });
+     $(document).on('click', '#edit-book', function () {
          $.ajax({
-             url: '/Issue/FillWithBookCode',
+             url: '/Issue/FillBookData',
              type: "GET",
              dataType: "JSON",
-             data: { ID: stateId },
+             data: { ID: $(this).attr('id') },
              success: function (books) {
-                 $("#Title").val(books.TITLE);
-                 $("#AccessionNo").val(stateId);
+                 $("#Title").val(books.Title);
+                 $("#AccessionNo").val(books.BookID);
+                 $("#BookCode").val(books.BookCode);
              }
          });
+         $('#modal-container').modal('hide');
      });
+     
     </script>
     
 }
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken();
+    <div id="modal-container" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-content">
+        </div>
+    </div>
     <div style="font-family:Calibri ;font-size:10px">
         <table style="width:100%;">
             <tr>
@@ -73,8 +103,8 @@
                     @Html.EditorFor(model => model.IssueNo , new { htmlAttributes = new { @class = "TextBoxTDBG4" } })
                     @Html.ValidationMessageFor(model => model.IssueNo, "", new { @class = "text-danger" })
                 </td>
-                <td style="width:10%"></td>
-                <td style="width: 40%">
+                <td style="width:10%;border: solid 1px #ffffff"></td>
+                <td style="width: 40%;border: solid 1px #ffffff">
                     <span class="dxeBase_DevEx" id="Span15"></span>
                 </td>
             </tr>
@@ -84,8 +114,8 @@
                     @Html.EditorFor(model => model.FromDate , new { htmlAttributes = new { @class = "TextBoxTDBG4" } })
                     @Html.ValidationMessageFor(model => model.FromDate, "", new { @class = "text-danger" })
                 </td>
-                <td style="width:10%"></td>
-                <td style="width: 40%">
+                <td style="width:10%;border: solid 1px #ffffff"></td>
+                <td style="width: 40%;border: solid 1px #ffffff">
                     <span class="dxeBase_DevEx" id="Span15"></span>
                 </td>
             </tr>
@@ -110,8 +140,8 @@
                     @Html.EditorFor(model => model.AccountCode , new { htmlAttributes = new { @class = "TextBoxTDBG4" } })
                     @Html.ValidationMessageFor(model => model.AccountCode, "", new { @class = "text-danger" })
                 </td>
-                <td style="width:10%"></td>
-                <td style="width: 40%">
+                <td style="width:10%;border: solid 1px #ffffff"></td>
+                <td style="width: 40%;border: solid 1px #ffffff">
                     <span class="dxeBase_DevEx" id="Span15"></span>
                 </td>
             </tr>
@@ -135,11 +165,13 @@
                 <td class="TextBoxTDBG3" style="width: 40%">
                     <span class="dxeBase_DevEx" id="Span5"></span>
                     @Html.DropDownListFor(model => model.AccessionNo,new SelectList((List<Tuple<string, int>>)ViewBag.AccessionList, "Item2","Item1"),"--Select--" , new {  @class = "TextBoxTDBG4",@ID = "AccessionNo"  })
+                    @*@Html.EditorFor(model => model.AccessionNo, new { htmlAttributes = new { @class = "TextBoxTDBG4", @ID = "AccessionNo" } })*@
                     @Html.ValidationMessageFor(model => model.AccessionNo, "", new { @class = "text-danger" })
                 </td>
-                <td style="width:10%"></td>
-                <td style="width: 40%">
+                <td style="width:10%;border: solid 1px #ffffff"></td>
+                <td style="width: 40%;border: solid 1px #ffffff">
                     <span class="dxeBase_DevEx" id="Span15"></span>
+                    @Html.ActionLink("Book Selection", "ViewBookSelection", "Issue",null, new { @class = "modal-link btn btn-success" })
                 </td>
             </tr>
             <tr>
@@ -174,7 +206,11 @@
             </tr>
         </table>
     </div>
+    
     <script type="text/javascript" >
+        
+    </script>
+    <script type="text/javascript">
         
     </script>
     <br />

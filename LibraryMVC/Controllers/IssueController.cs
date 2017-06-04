@@ -115,9 +115,60 @@ namespace LibraryMVC.Controllers
             {
                 return Json(null);
             }
-            int bmID = db.Database.SqlQuery<int>("Select BookMastID from School_LibraryBookDetails where BookID=" + ID.ToString() + "").FirstOrDefault();
-            var books = db.LibraryBookMasterListSP().Where(b=>b.BookMastID==bmID ).Single();
-            return Json(books, JsonRequestBehavior.AllowGet);
+            var bk = db.LibraryBookCopyDetailsSP((int)ID).Single();
+            return Json(bk, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpGet]
+        public JsonResult FillBookData(int? ID)
+        {
+            if (ID == null)
+            {
+                return Json(null);
+            }
+            var bk = db.LibraryBookCopyDetailsSP((int)ID).Single();
+            return Json(bk, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult ViewBookSelection()
+        {
+            var bks = db.LibraryBookCopyDetailsSP(0).ToList();
+            return PartialView("BookSelection",bks);
+        }
+
+        [HttpPost]
+        public PartialViewResult SearchBooks(string searchText)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                if (searchText != null && searchText != "")
+                {
+                    var biL = db.LibraryBookCopyDetailsSP(0).Where(ir => ((ir.Title == null ? "" : ir.Title).IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0 || (ir.BookCode == null ? "" : ir.BookCode).IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0 || (ir.AccessionNo == null ? "" : ir.AccessionNo).IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0)).ToList();
+                    return PartialView("BookSelectionList", biL);
+                }
+                else
+                {
+                    return PartialView("BookSelectionList", db.LibraryBookCopyDetailsSP(0).ToList());
+                }
+                //if (Request.IsAjaxRequest())
+                //{
+                //    if (searchText != null && searchText != "" && biL.Count > 0)
+                //    {
+                //        var newL = (from LibraryBookCopyDetailsSP_Result ir in biL where ((ir.Title == null ? "" : ir.Title).IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0 || (ir.BookCode == null ? "" : ir.BookCode).IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0 || (ir.AccessionNo == null ? "" : ir.AccessionNo).IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0 ) select ir).ToList();
+                //        return PartialView("BookSelectionList", newL);
+                //    }
+                //    else
+                //    {
+                //        return PartialView("BookSelectionList", biL);
+                //    }
+                //}
+            }
+            else
+            {
+                return PartialView("BookSelectionList", db.LibraryBookCopyDetailsSP(0).ToList());
+            }
+            return PartialView("BookSelectionList", db.LibraryBookCopyDetailsSP(0).ToList());
+        }
+
     }
 }

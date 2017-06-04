@@ -1,0 +1,45 @@
+﻿@model List<LibraryMVC.Models.LibraryBookCopyDetailsSP_Result>
+<div style="font-family:Calibri ;font-size:12px">
+    @{
+        WebGrid grid = new WebGrid(Model, canPage: true, rowsPerPage: 10, selectionFieldName: "selectedRow", ajaxUpdateContainerId: "gridContent");
+        <div id="gridContent">
+            @grid.GetHtml(
+                            tableStyle: "table table-bordered table-striped table-condensed",
+                            mode: WebGridPagerModes.All,
+                            firstText: "<<First",
+                            lastText: "Last>>",
+                            nextText: "Next>",
+                            previousText: "<Prev",
+                            headerStyle: "grid-header",
+                         footerStyle: "webgrid-footer",
+                         alternatingRowStyle: "webgrid-alternating-row",
+                         selectedRowStyle: "webgrid-selected-row",
+                         rowStyle: "gridrow",
+                         columns: grid.Columns
+                         (
+                            grid.Column("AccessionNo", "ACCESSION NO"),
+                            grid.Column("BookCode", "BOOK CODE"),
+                            grid.Column("Title", "TITLE", style: "description"),
+                            grid.Column("", format: @<button class="edit-book" type="button" id="@item.BookID">Select</button>)
+                        )
+                )
+        </div>
+    }
+</div>
+<script type="text/javascript">
+    $(document).on('click', '.edit-book', function () {
+        $.ajax({
+            url: '/Issue/FillBookData',
+            type: "GET",
+            dataType: "JSON",
+            data: { ID: $(this).attr('id') },
+            success: function (books) {
+                $("#Title").val(books.Title);
+                $("#AccessionNo").val(books.BookID);
+                $("#BookCode").val(books.BookCode);
+            }
+        });
+        $('#modal-container').modal('hide');
+    });
+   
+</script>
