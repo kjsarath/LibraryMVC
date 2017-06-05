@@ -95,6 +95,24 @@
      //        }
      //    });
      //    $('#modal-container').modal('hide');
+        //});
+
+     $(document).on('change', "#FromDate, #ToDate", function () {
+         if (Date.parse($("#FromDate").val()) && Date.parse($("#ToDate").val())) {
+             var st = $("#FromDate").val();
+             var en = $("#ToDate").val();
+             var diff = new Date(new Date(en) - new Date(st));
+             $("#NoOfDays").val(diff / 1000 / 60 / 60 / 24);
+         }
+     });
+
+     //$(document).on('change', "#ToDate", function () {
+     //    if (Date.parse($("#FromDate").val()) && Date.parse($("#ToDate").val())) {
+     //        var st = $("#FromDate").val();
+     //        var en = $("#ToDate").val();
+     //        var diff = new Date(new Date(en) - new Date(st));
+     //        $("#NoOfDays").val(diff / 1000 / 60 / 60 / 24);
+     //    }
      //});
     </script>
     
@@ -135,7 +153,7 @@
             <tr>
                 <td class="tdStyle2" style="width:10%">Issued On</td>
                 <td class="TextBoxTDBG3" style="width: 40%">
-                    @Html.EditorFor(model => model.FromDate , new { htmlAttributes = new { @class = "TextBoxTDBG4" } })
+                    @Html.EditorFor(model => model.FromDate , new { htmlAttributes = new { @class = "TextBoxTDBG4", @ID = "FromDate" } })
                     @Html.ValidationMessageFor(model => model.FromDate, "", new { @class = "text-danger" })
                 </td>
                 <td style="width:10%;border: solid 1px #ffffff"></td>
@@ -146,12 +164,12 @@
             <tr>
                 <td class="tdStyle2" style="width:10%">Due Date</td>
                 <td class="TextBoxTDBG3" style="width: 40%">
-                    @Html.EditorFor(model => model.ToDate , new { htmlAttributes = new { @class = "TextBoxTDBG4" } })
+                    @Html.EditorFor(model => model.ToDate , new { htmlAttributes = new { @class = "TextBoxTDBG4", @ID = "ToDate" } })
                     @Html.ValidationMessageFor(model => model.ToDate, "", new { @class = "text-danger" })
                 </td>
                 <td class="tdStyle2" style="width:10%">No Of Days</td>
                 <td class="TextBoxTDBG3" style="width: 40%">
-                    @Html.EditorFor(model => model.NoOfDays , new { htmlAttributes = new { @class = "TextBoxTDBG4" } })
+                    @Html.EditorFor(model => model.NoOfDays , new { htmlAttributes = new { @class = "TextBoxTDBG4", @ID = "NoOfDays" } })
                     @Html.ValidationMessageFor(model => model.NoOfDays, "", new { @class = "text-danger" })
                 </td>
             </tr>
