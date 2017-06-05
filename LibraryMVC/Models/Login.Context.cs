@@ -45,13 +45,17 @@ namespace LibraryMVC.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LibraryMembersListSP_Result>("LibraryMembersListSP");
         }
     
-        public virtual ObjectResult<LibraryMemberDetailsSP_Result> LibraryMemberDetailsSP(Nullable<int> memberID)
+        public virtual ObjectResult<LibraryMemberDetailsSP_Result> LibraryMemberDetailsSP(Nullable<int> memberID, Nullable<int> accountID)
         {
             var memberIDParameter = memberID.HasValue ?
                 new ObjectParameter("MemberID", memberID) :
                 new ObjectParameter("MemberID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LibraryMemberDetailsSP_Result>("LibraryMemberDetailsSP", memberIDParameter);
+            var accountIDParameter = accountID.HasValue ?
+                new ObjectParameter("accountID", accountID) :
+                new ObjectParameter("accountID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LibraryMemberDetailsSP_Result>("LibraryMemberDetailsSP", memberIDParameter, accountIDParameter);
         }
     
         public virtual ObjectResult<LibrarySubMasterDetailsSP_Result> LibrarySubMasterDetailsSP(Nullable<int> iD)

@@ -71,34 +71,85 @@ namespace LibraryMVC.Controllers
         [MultipleButton(Name = "action", Argument = "Save")]
         public ActionResult Save(int? ID)
         {
-            var biD = new LibraryGetIssueDetails_Result();
-            if (TryUpdateModel(biD))
+            if ((int)ID == 0)
             {
-                try
+                var biD = new LibraryGetIssueDetails_Result();
+                if (TryUpdateModel(biD))
                 {
-                    var x = new School_LibraryIssue();
-                    x.AccessionNo = biD.AccessionNo;
-                    x.IssueNo = biD.IssueNo;
-                    x.IssueDate = biD.IssueDate;
-                    x.FromDate = biD.IssueDate;
-                    x.ToDate = biD.ToDate;
-                    x.MaxDays = biD.NoOfDays;
-                    x.MemberID = biD.MemberID;
-                    x.MemberType = biD.Description;
-                    x.BookID = biD.BookID;
-                    x.Title = biD.Title;
-                    x.IssueStatus = "Out";
+                    try
+                    {
+                        var x = new School_LibraryIssue();
+                        x.AccessionNo = biD.AccessionNo;
+                        x.IssueNo = biD.IssueNo;
+                        x.IssueDate = biD.FromDate;
+                        x.FromDate = biD.FromDate;
+                        x.ToDate = biD.ToDate;
+                        x.MaxDays = biD.NoOfDays;
+                        x.MemberID = biD.MemberID;
+                        x.MemberType = biD.Description;
+                        x.BookID = biD.BookID;
+                        x.Title = biD.Title;
+                        x.IssueStatus = "Issued";
 
-                    db.School_LibraryIssue.Add(x);
-                    db.SaveChanges();
-                    return RedirectToAction("Details", new { ID = x.ID });
+                        db.School_LibraryIssue.Add(x);
+
+                        var bd = db.School_LibraryBookDetails.Where(d => d.BookID == biD.BookID).Single();
+                        if(biD.issuedstatus=="Returned")bd.IssueStatus = "In";
+                        else bd.IssueStatus = "Out";
+
+                        db.SaveChanges();
+                        return RedirectToAction("Details", new { ID = x.ID });
+                    }
+                    catch (RetryLimitExceededException)
+                    {
+                        ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, contact your system administrator.");
+                    }
                 }
-                catch (RetryLimitExceededException)
+            }
+            else
+            {
+                var biD = db.LibraryGetIssueDetails("%", "%", (int)ID).Single();
+                if (TryUpdateModel(biD))
                 {
-                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, contact your system administrator.");
+                    try
+                    {
+                        var x =db.School_LibraryIssue.Where(s=>s.ID==(int)ID).Single();
+                        x.AccessionNo = biD.AccessionNo;
+                        x.IssueNo = biD.IssueNo;
+                        x.IssueDate = biD.FromDate;
+                        x.FromDate = biD.FromDate;
+                        x.ToDate = biD.ToDate;
+                        x.MaxDays = biD.NoOfDays;
+                        x.MemberID = biD.MemberID;
+                        x.MemberType = biD.Description;
+                        x.BookID = biD.BookID;
+                        x.Title = biD.Title;
+                        x.IssueStatus = "Issued";
+
+                        var bd = db.School_LibraryBookDetails.Where(d => d.BookID == biD.BookID).Single();
+                        if (biD.issuedstatus == "Returned") bd.IssueStatus = "In";
+                        else bd.IssueStatus = "Out";
+
+                        db.SaveChanges();
+                        return RedirectToAction("Details", new { ID = x.ID });
+                    }
+                    catch (RetryLimitExceededException)
+                    {
+                        ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, contact your system administrator.");
+                    }
                 }
             }
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        [MultipleButton(Name = "action", Argument = "Edit")]
+        public ActionResult Edit(int? ID)
+        {
+            var biD = db.LibraryGetIssueDetails("%","%",(int)ID).Single();
+            DataTable dtAcc = clsDBOperations.GetTable("select distinct lbd.AccessionNo,lbd.BookID,lbm.Title,lbm.BookCode,lbm.BookMastID from School_LibraryBookMaster lbm Inner Join School_LibraryBookDetails lbd on lbm.BookMastID=lbd.BookMastID", db);
+            ViewBag.AccessionList = (from DataRow dr in dtAcc.Rows select dr).Select(c => new Tuple<string, int>(c["AccessionNo"].ToString(), int.Parse(c["BookID"].ToString()))).ToList();
+            return View("Add",biD);
         }
 
         [HttpPost]
@@ -143,7 +194,7 @@ namespace LibraryMVC.Controllers
             {
                 if (searchText != null && searchText != "")
                 {
-                    var biL = db.LibraryBookCopyDetailsSP(0).Where(ir => ((ir.Title == null ? "" : ir.Title).IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0 || (ir.BookCode == null ? "" : ir.BookCode).IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0 || (ir.AccessionNo == null ? "" : ir.AccessionNo).IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0)).ToList();
+                   var biL = db.LibraryBookCopyDetailsSP(0).Where(ir => ((ir.Title == null ? "" : ir.Title).IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0 || (ir.BookCode == null ? "" : ir.BookCode).IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0 || (ir.AccessionNo == null ? "" : ir.AccessionNo).IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0)).ToList();
                     return PartialView("BookSelectionList", biL);
                 }
                 else
@@ -167,8 +218,44 @@ namespace LibraryMVC.Controllers
             {
                 return PartialView("BookSelectionList", db.LibraryBookCopyDetailsSP(0).ToList());
             }
-            return PartialView("BookSelectionList", db.LibraryBookCopyDetailsSP(0).ToList());
         }
 
+        public ActionResult ViewMemberSelection()
+        {
+            var mems = db.LibraryMembersListSP().ToList();
+            return PartialView("MemberSelection", mems);
+        }
+
+        [HttpPost]
+        public PartialViewResult SearchMembers(string searchText)
+        {
+            if (Request.IsAjaxRequest())
+            {
+                if (searchText != null && searchText != "")
+                {
+                    var biL = db.LibraryMembersListSP().Where(ir => ((ir.Member_Code  == null ? "" : ir.Member_Code).IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0 || (ir.Member_Name == null ? "" : ir.Member_Name).IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0 )).ToList();
+                    return PartialView("MemberSelectionList", biL);
+                }
+                else
+                {
+                    return PartialView("MemberSelectionList", db.LibraryMembersListSP().ToList());
+                }
+            }
+            else
+            {
+                return PartialView("MemberSelectionList", db.LibraryMembersListSP().ToList());
+            }
+        }
+
+        [HttpGet]
+        public JsonResult FillMemberData(int? ID)
+        {
+            if (ID == null)
+            {
+                return Json(null);
+            }
+            var mem = db.LibraryMemberDetailsSP (0,(int)ID).Single();
+            return Json(mem, JsonRequestBehavior.AllowGet);
+        }
     }
 }

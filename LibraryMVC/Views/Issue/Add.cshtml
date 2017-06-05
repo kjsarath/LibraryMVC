@@ -20,6 +20,7 @@
          });
 
      });
+
      $(document).on('change', '#AccessionNo', function () {
          var stateId = $('#AccessionNo').val();
          $.ajax({
@@ -30,6 +31,7 @@
              success: function (books) {
                  $("#Title").val(books.Title);
                  $("#BookCode").val(books.BookCode);
+                 $("#BookID").val(books.BookID);
              }
          });
      });
@@ -44,6 +46,7 @@
              e.preventDefault();
              $(this).attr('data-target', '#modal-container');
              $(this).attr('data-toggle', 'modal');
+             $("#txtSearch").focus();
          });
          // Attach listener to .modal-close-btn's so that when the button is pressed the modal dialog disappears
          $('body').on('click', '.modal-close-btn', function () {
@@ -57,21 +60,42 @@
              return false;
          });
      });
-     $(document).on('click', '#edit-book', function () {
-         $.ajax({
-             url: '/Issue/FillBookData',
-             type: "GET",
-             dataType: "JSON",
-             data: { ID: $(this).attr('id') },
-             success: function (books) {
-                 $("#Title").val(books.Title);
-                 $("#AccessionNo").val(books.BookID);
-                 $("#BookCode").val(books.BookCode);
-             }
-         });
-         $('#modal-container').modal('hide');
+
+     //$(document).on('click', '#edit-book', function () {
+     //    $.ajax({
+     //        url: '/Issue/FillBookData',
+     //        type: "GET",
+     //        dataType: "JSON",
+     //        data: { ID: $(this).attr('id') },
+     //        success: function (books) {
+     //            $("#Title").val(books.Title);
+     //            $("#AccessionNo").val(books.AccessionNo);
+     //            $("#BookCode").val(books.BookCode);
+     //            $("#BookID").val(books.BookID);
+     //        }
+     //    });
+     //    $('#modal-container').modal('hide');
+     //});
+
+     $('#modal-container').on('shown.bs.modal', function () {
+         $('#txtSearch').focus();
      });
-     
+
+     //$(document).on('click', '#edit-member', function () {
+     //    $.ajax({
+     //        url: '/Issue/FillMemberData',
+     //        type: "GET",
+     //        dataType: "JSON",
+     //        data: { ID: $(this).attr('id') },
+     //        success: function (mems) {
+     //            $("#AccountCode").val(mems.AccountCode);
+     //            $("#AccountName").val(mems.AccountName);
+     //            $("#Description").val(mems.Category);
+     //            $("#MemberID").val(mems.AccountID);
+     //        }
+     //    });
+     //    $('#modal-container').modal('hide');
+     //});
     </script>
     
 }
@@ -90,8 +114,8 @@
                     <hr />
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     @Html.HiddenFor(model => model.ID)
-                    @Html.HiddenFor(model => model.BookID )
-                    @Html.HiddenFor(model=>model.MemberID )
+                    @Html.HiddenFor(model => model.BookID , new { htmlAttributes = new { @ID = "BookID" } })
+                    @Html.HiddenFor(model=>model.MemberID, new { htmlAttributes = new { @ID = "MemberID" } })
                 </td>
             </tr>
             <tr>
@@ -137,8 +161,17 @@
             <tr>
                 <td class="tdStyle2" style="width:10%">Member Code</td>
                 <td class="TextBoxTDBG3" style="width: 40%">
-                    @Html.EditorFor(model => model.AccountCode , new { htmlAttributes = new { @class = "TextBoxTDBG4" } })
-                    @Html.ValidationMessageFor(model => model.AccountCode, "", new { @class = "text-danger" })
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:80%">
+                                @Html.EditorFor(model => model.AccountCode, new { htmlAttributes = new { @class = "TextBoxTDBG4", @ID = "AccountCode" } })
+                                @Html.ValidationMessageFor(model => model.AccountCode, "", new { @class = "text-danger" })
+                            </td>
+                            <td style="width:20%">
+                                @Html.ActionLink("Select", "ViewMemberSelection", "Issue", null, new { @class = "modal-link btn" })
+                            </td>
+                        </tr>
+                    </table>
                 </td>
                 <td style="width:10%;border: solid 1px #ffffff"></td>
                 <td style="width: 40%;border: solid 1px #ffffff">
@@ -148,12 +181,12 @@
             <tr>
                 <td class="tdStyle2" style="width:10%">Name</td>
                 <td class="TextBoxTDBG3" style="width: 40%">
-                    @Html.EditorFor(model => model.AccountName , new { htmlAttributes = new { @class = "TextBoxTDBG4" } })
+                    @Html.EditorFor(model => model.AccountName , new { htmlAttributes = new { @class = "TextBoxTDBG4", @ID = "AccountName" } })
                     @Html.ValidationMessageFor(model => model.AccountName, "", new { @class = "text-danger" })
                 </td>
                 <td class="tdStyle2" style="width:10%">Category</td>
                 <td class="TextBoxTDBG3" style="width: 40%">
-                    @Html.EditorFor(model => model.Description , new { htmlAttributes = new { @class = "TextBoxTDBG4" } })
+                    @Html.EditorFor(model => model.Description , new { htmlAttributes = new { @class = "TextBoxTDBG4", @ID = "Description" } })
                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                 </td>
             </tr>
@@ -164,14 +197,23 @@
                 <td class="tdStyle2" style="width:10%">Accession No</td>
                 <td class="TextBoxTDBG3" style="width: 40%">
                     <span class="dxeBase_DevEx" id="Span5"></span>
-                    @Html.DropDownListFor(model => model.AccessionNo,new SelectList((List<Tuple<string, int>>)ViewBag.AccessionList, "Item2","Item1"),"--Select--" , new {  @class = "TextBoxTDBG4",@ID = "AccessionNo"  })
-                    @*@Html.EditorFor(model => model.AccessionNo, new { htmlAttributes = new { @class = "TextBoxTDBG4", @ID = "AccessionNo" } })*@
-                    @Html.ValidationMessageFor(model => model.AccessionNo, "", new { @class = "text-danger" })
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:80%">
+                                @*@Html.DropDownListFor(model => model.AccessionNo, new SelectList((List<Tuple<string, int>>)ViewBag.AccessionList, "Item2", "Item1"), "--Select--", new { @class = "TextBoxTDBG4", @ID = "AccessionNo" })*@
+                                @Html.EditorFor(model => model.AccessionNo, new { htmlAttributes = new { @class = "TextBoxTDBG4", @ID = "AccessionNo" } })
+                                @Html.ValidationMessageFor(model => model.AccessionNo, "", new { @class = "text-danger" })
+                            </td>
+                            <td style="width:20%">
+                                @Html.ActionLink("Select", "ViewBookSelection", "Issue", null, new { @class = "modal-link btn" })
+                            </td>
+                        </tr>
+                    </table>
+                    
                 </td>
                 <td style="width:10%;border: solid 1px #ffffff"></td>
                 <td style="width: 40%;border: solid 1px #ffffff">
                     <span class="dxeBase_DevEx" id="Span15"></span>
-                    @Html.ActionLink("Book Selection", "ViewBookSelection", "Issue",null, new { @class = "modal-link btn btn-success" })
                 </td>
             </tr>
             <tr>

@@ -131,7 +131,7 @@ namespace LibraryMVC.Controllers
         public ActionResult Detail(int ID)
         {
             OrisonSystemSCHOOLEntities e = new OrisonSystemSCHOOLEntities();
-            LibraryMemberDetailsSP_Result  memD = (e.LibraryMemberDetailsSP(ID)).Single();
+            LibraryMemberDetailsSP_Result  memD = (e.LibraryMemberDetailsSP(ID,0)).Single();
             return View(memD);
         }
 
@@ -143,7 +143,7 @@ namespace LibraryMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LibraryMemberDetailsSP_Result memToUpdate = db.LibraryMemberDetailsSP(ID).Single();
+            LibraryMemberDetailsSP_Result memToUpdate = db.LibraryMemberDetailsSP(ID,0).Single();
             if (memToUpdate == null)
             {
                 return HttpNotFound();
@@ -159,7 +159,7 @@ namespace LibraryMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var memToUpdate = db.LibraryMemberDetailsSP(ID).Single();
+            var memToUpdate = db.LibraryMemberDetailsSP(ID,0).Single();
             if (TryUpdateModel(memToUpdate))
             {
                 try

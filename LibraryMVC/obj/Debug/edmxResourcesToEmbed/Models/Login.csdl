@@ -36,6 +36,7 @@
     <EntitySet Name="Library_Members" EntityType="LoginModel.Library_Members" />
     <FunctionImport Name="LibraryMemberDetailsSP" ReturnType="Collection(LoginModel.LibraryMemberDetailsSP_Result)">
       <Parameter Name="MemberID" Mode="In" Type="Int32" />
+      <Parameter Name="accountID" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="LibrarySubMasterDetailsSP" ReturnType="Collection(LoginModel.LibrarySubMasterDetailsSP_Result)">
       <Parameter Name="ID" Mode="In" Type="Int32" />

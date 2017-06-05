@@ -13,7 +13,7 @@
                 <table style="width:90%;" align="center">
                     <tr>
                         <td colspan="2">
-                            <input type="text" id="txtSearch" placeholder="Type here to search..." style="width:100%" class="TextBoxTDBG4" onkeyup="Search()" />
+                            <input type="text" id="txtSearch" placeholder="Type here to search..." style="width:100%" class="TextBoxTDBG4"  />
                             <br />
                         </td>
                     </tr>
@@ -37,22 +37,36 @@
         });
     });
     
-    function Search() {
+    $('#txtSearch').keyup(function(e) {
         var searchval = $("#txtSearch").val();
-        if (searchval.length >= 3) {
+        if (e.keyCode == 8 || e.keyCode == 48) {
             $.ajax(
-                {
-                    type: "POST",
-                    url: "/Issue/SearchBooks",
-                    data: { searchText: searchval },
-                    dataType: "html",
-                    success: function (data) { $("#divPartialView").html(data); }
+                    {
+                        type: "POST",
+                        url: "/Issue/SearchBooks",
+                        data: { searchText: searchval },
+                        dataType: "html",
+                        success: function (data) { $("#divPartialView").html(data); }
 
-                }
-                );
+                    }
+                    );
         }
-    };
+        else {
+            if (searchval.length >= 3) {
+                $.ajax(
+                    {
+                        type: "POST",
+                        url: "/Issue/SearchBooks",
+                        data: { searchText: searchval },
+                        dataType: "html",
+                        success: function (data) { $("#divPartialView").html(data); }
+
+                    }
+                    );
+            }
+        }
+    });
     $('#modal-container').on('shown.bs.modal', function () {
-        $('input:text:visible:first', this).focus();
+        $('#txtSearch').focus();
     });
 </script>

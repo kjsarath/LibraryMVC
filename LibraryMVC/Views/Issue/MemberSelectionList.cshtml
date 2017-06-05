@@ -1,4 +1,4 @@
-﻿@model List<LibraryMVC.Models.LibraryBookCopyDetailsSP_Result>
+﻿@model List<LibraryMVC.Models .LibraryMembersListSP_Result>
 <div style="font-family:Calibri ;font-size:12px">
     @{
         WebGrid grid = new WebGrid(Model, canPage: true, rowsPerPage: 10, selectionFieldName: "selectedRow", ajaxUpdateContainerId: "gridContent");
@@ -17,31 +17,28 @@
                          rowStyle: "gridrow",
                          columns: grid.Columns
                          (
-                            grid.Column("AccessionNo", "ACCESSION NO"),
-                            grid.Column("BookCode", "BOOK CODE"),
-                            grid.Column("Title", "TITLE", style: "description"),
-                            grid.Column("", format: @<button class="edit-book" type="button" id="@item.BookID">Select</button>)
+                            grid.Column("Member_Code", "MEMBER CODE"),
+                            grid.Column("Member_Name", "MEMBER NAME", style: "description"),
+                            grid.Column("", format: @<button class="edit-member" type="button" id="@item.AccountID">Select</button>)
                         )
                 )
         </div>
     }
 </div>
-<script type="text/javascript">
-    $(document).on('click', '.edit-book', function () {
+<script type="text/javascript" >
+    $(document).on('click', '.edit-member', function () {
         $.ajax({
-            url: '/Issue/FillBookData',
+            url: '/Issue/FillMemberData',
             type: "GET",
             dataType: "JSON",
             data: { ID: $(this).attr('id') },
-            success: function (books) {
-                $("#Title").val(books.Title);
-                $("#AccessionNo").val(books.AccessionNo);
-                //$("#AccessionNo option:contains(" + AccessionNo + ")").attr('selected', 'selected');
-                $("#BookCode").val(books.BookCode);
-                $("#BookID").val(books.BookID);
+            success: function (mems) {
+                $("#AccountCode").val(mems.Code);
+                $("#AccountName").val(mems.Name);
+                $("#Description").val(mems.Category);
+                $("#MemberID").val(mems.AccountID);
             }
         });
         $('#modal-container').modal('hide');
     });
-   
 </script>

@@ -217,6 +217,7 @@
         </Function>
         <Function Name="LibraryMemberDetailsSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MemberID" Type="int" Mode="In" />
+          <Parameter Name="accountID" Type="int" Mode="In" />
         </Function>
         <Function Name="LibraryMembersListSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="LibrarySubMasterDetailsSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -282,6 +283,7 @@
           <EntitySet Name="Library_Members" EntityType="LoginModel.Library_Members" />
           <FunctionImport Name="LibraryMemberDetailsSP" ReturnType="Collection(LoginModel.LibraryMemberDetailsSP_Result)">
           <Parameter Name="MemberID" Mode="In" Type="Int32" />
+            <Parameter Name="accountID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="LibrarySubMasterDetailsSP" ReturnType="Collection(LoginModel.LibrarySubMasterDetailsSP_Result)">
           <Parameter Name="ID" Mode="In" Type="Int32" />
