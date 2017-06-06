@@ -194,6 +194,7 @@
     <Compile Include="Models\LibraryGetIssueDetails_Result.cs">
       <DependentUpon>Login.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LibraryGetIssueDetails_ResultMetaData.cs" />
     <Compile Include="Models\LibraryMemberDetailsSP_Result.cs">
       <DependentUpon>Login.tt</DependentUpon>
     </Compile>

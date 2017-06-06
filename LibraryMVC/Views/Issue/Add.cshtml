@@ -98,22 +98,24 @@
         //});
 
      $(document).on('change', "#FromDate, #ToDate", function () {
-         if (Date.parse($("#FromDate").val()) && Date.parse($("#ToDate").val())) {
+         if (Date.parse($("#FromDate").val()) && Date.parse($("#ToDate").val()))
+         {
              var st = $("#FromDate").val();
              var en = $("#ToDate").val();
              var diff = new Date(new Date(en) - new Date(st));
              $("#NoOfDays").val(diff / 1000 / 60 / 60 / 24);
          }
+         else
+         {
+             $("#NoOfDays").val("0");
+         }
      });
+     
 
-     //$(document).on('change', "#ToDate", function () {
-     //    if (Date.parse($("#FromDate").val()) && Date.parse($("#ToDate").val())) {
-     //        var st = $("#FromDate").val();
-     //        var en = $("#ToDate").val();
-     //        var diff = new Date(new Date(en) - new Date(st));
-     //        $("#NoOfDays").val(diff / 1000 / 60 / 60 / 24);
-     //    }
-     //});
+     function toDate(selector) {
+         var from = $(selector).val().split("-");
+         return new Date(from[2], from[1], from[0]);
+     };
     </script>
     
 }
