@@ -205,6 +205,15 @@
     <Parameter Name="ID" Type="int" Mode="In" />
   </Function>
   <Function Name="LibraryBookMasterListSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="LibraryBookReturnDetailsSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ReturnID" Type="int" Mode="In" />
+    <Parameter Name="AcademicYear" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="LibraryBookReturnListSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AcademicYear" Type="nvarchar" Mode="In" />
+    <Parameter Name="Shift" Type="nvarchar" Mode="In" />
+    <Parameter Name="date" Type="smalldatetime" Mode="In" />
+  </Function>
   <Function Name="LibraryGetIssueDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="AcademicYear" Type="nvarchar" Mode="In" />
     <Parameter Name="Shift" Type="nvarchar" Mode="In" />

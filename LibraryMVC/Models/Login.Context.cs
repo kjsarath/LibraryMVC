@@ -123,5 +123,35 @@ namespace LibraryMVC.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LibraryBookCopyDetailsSP_Result>("LibraryBookCopyDetailsSP", iDParameter);
         }
+    
+        public virtual ObjectResult<LibraryBookReturnDetailsSP_Result> LibraryBookReturnDetailsSP(Nullable<int> returnID, string academicYear)
+        {
+            var returnIDParameter = returnID.HasValue ?
+                new ObjectParameter("ReturnID", returnID) :
+                new ObjectParameter("ReturnID", typeof(int));
+    
+            var academicYearParameter = academicYear != null ?
+                new ObjectParameter("AcademicYear", academicYear) :
+                new ObjectParameter("AcademicYear", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LibraryBookReturnDetailsSP_Result>("LibraryBookReturnDetailsSP", returnIDParameter, academicYearParameter);
+        }
+    
+        public virtual ObjectResult<LibraryBookReturnListSP_Result> LibraryBookReturnListSP(string academicYear, string shift, Nullable<System.DateTime> date)
+        {
+            var academicYearParameter = academicYear != null ?
+                new ObjectParameter("AcademicYear", academicYear) :
+                new ObjectParameter("AcademicYear", typeof(string));
+    
+            var shiftParameter = shift != null ?
+                new ObjectParameter("Shift", shift) :
+                new ObjectParameter("Shift", typeof(string));
+    
+            var dateParameter = date.HasValue ?
+                new ObjectParameter("date", date) :
+                new ObjectParameter("date", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LibraryBookReturnListSP_Result>("LibraryBookReturnListSP", academicYearParameter, shiftParameter, dateParameter);
+        }
     }
 }

@@ -210,6 +210,15 @@
           <Parameter Name="ID" Type="int" Mode="In" />
         </Function>
         <Function Name="LibraryBookMasterListSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="LibraryBookReturnDetailsSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ReturnID" Type="int" Mode="In" />
+          <Parameter Name="AcademicYear" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="LibraryBookReturnListSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AcademicYear" Type="nvarchar" Mode="In" />
+          <Parameter Name="Shift" Type="nvarchar" Mode="In" />
+          <Parameter Name="date" Type="smalldatetime" Mode="In" />
+        </Function>
         <Function Name="LibraryGetIssueDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="AcademicYear" Type="nvarchar" Mode="In" />
           <Parameter Name="Shift" Type="nvarchar" Mode="In" />
@@ -282,7 +291,7 @@
           <FunctionImport Name="LibraryMembersListSP" ReturnType="Collection(LoginModel.LibraryMembersListSP_Result)" />
           <EntitySet Name="Library_Members" EntityType="LoginModel.Library_Members" />
           <FunctionImport Name="LibraryMemberDetailsSP" ReturnType="Collection(LoginModel.LibraryMemberDetailsSP_Result)">
-          <Parameter Name="MemberID" Mode="In" Type="Int32" />
+            <Parameter Name="MemberID" Mode="In" Type="Int32" />
             <Parameter Name="accountID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="LibrarySubMasterDetailsSP" ReturnType="Collection(LoginModel.LibrarySubMasterDetailsSP_Result)">
@@ -307,6 +316,15 @@
           </FunctionImport>
           <FunctionImport Name="LibraryBookCopyDetailsSP" ReturnType="Collection(LoginModel.LibraryBookCopyDetailsSP_Result)">
           <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="LibraryBookReturnDetailsSP" ReturnType="Collection(LoginModel.LibraryBookReturnDetailsSP_Result)">
+            <Parameter Name="ReturnID" Mode="In" Type="Int32" />
+            <Parameter Name="AcademicYear" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="LibraryBookReturnListSP" ReturnType="Collection(LoginModel.LibraryBookReturnListSP_Result)">
+            <Parameter Name="AcademicYear" Mode="In" Type="String" />
+            <Parameter Name="Shift" Mode="In" Type="String" />
+            <Parameter Name="date" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="School_LibraryBookMaster">
@@ -695,6 +713,49 @@
           <Property Type="String" Name="ArticleCategory" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="GMD" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="CallNo" Nullable="true" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="LibraryBookReturnDetailsSP_Result">
+          <Property Type="Int32" Name="ReturnID" Nullable="false" />
+          <Property Type="Int32" Name="IssueID" Nullable="true" />
+          <Property Type="String" Name="ReturnNo" Nullable="true" MaxLength="30" />
+          <Property Type="DateTime" Name="ReturnDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="IssueNo" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="IssueDate" Nullable="true" Precision="16" />
+          <Property Type="String" Name="BookCode" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Title" Nullable="true" />
+          <Property Type="String" Name="Author" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="AccessionNo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ISBN" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Barcode" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="BookID" Nullable="false" />
+          <Property Type="Int64" Name="MemberID" Nullable="true" />
+          <Property Type="String" Name="MemberType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="MemberCode" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="MemberName" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="DaysInHand" Nullable="true" />
+          <Property Type="Decimal" Name="Fine" Nullable="true" Precision="19" />
+          <Property Type="Int32" Name="NoOfDays" Nullable="true" />
+          <Property Type="String" Name="Class" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Division" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Remarks" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="LibraryBookReturnListSP_Result">
+          <Property Type="Int32" Name="ReturnID" Nullable="false" />
+          <Property Type="Int32" Name="IssueID" Nullable="true" />
+          <Property Type="String" Name="ReturnNo" Nullable="true" MaxLength="30" />
+          <Property Type="DateTime" Name="ReturnDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="IssueNo" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="IssueDate" Nullable="true" Precision="16" />
+          <Property Type="String" Name="Title" Nullable="true" />
+          <Property Type="String" Name="Author" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="AccessionNo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ISBN" Nullable="true" MaxLength="50" />
+          <Property Type="Int64" Name="MemberID" Nullable="true" />
+          <Property Type="String" Name="MemberType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="MemberCode" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="MemberName" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="DaysInHand" Nullable="true" />
+          <Property Type="Decimal" Name="Fine" Nullable="true" Precision="19" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1117,6 +1178,57 @@
                 <ScalarProperty Name="ArticleCategory" ColumnName="ArticleCategory" />
                 <ScalarProperty Name="GMD" ColumnName="GMD" />
                 <ScalarProperty Name="CallNo" ColumnName="CallNo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LibraryBookReturnDetailsSP" FunctionName="LoginModel.Store.LibraryBookReturnDetailsSP">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LoginModel.LibraryBookReturnDetailsSP_Result">
+                <ScalarProperty Name="ReturnID" ColumnName="ReturnID" />
+                <ScalarProperty Name="IssueID" ColumnName="IssueID" />
+                <ScalarProperty Name="ReturnNo" ColumnName="ReturnNo" />
+                <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
+                <ScalarProperty Name="IssueNo" ColumnName="IssueNo" />
+                <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+                <ScalarProperty Name="BookCode" ColumnName="BookCode" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="AccessionNo" ColumnName="AccessionNo" />
+                <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="MemberType" ColumnName="MemberType" />
+                <ScalarProperty Name="MemberCode" ColumnName="MemberCode" />
+                <ScalarProperty Name="MemberName" ColumnName="MemberName" />
+                <ScalarProperty Name="DaysInHand" ColumnName="DaysInHand" />
+                <ScalarProperty Name="Fine" ColumnName="Fine" />
+                <ScalarProperty Name="NoOfDays" ColumnName="NoOfDays" />
+                <ScalarProperty Name="Class" ColumnName="Class" />
+                <ScalarProperty Name="Division" ColumnName="Division" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LibraryBookReturnListSP" FunctionName="LoginModel.Store.LibraryBookReturnListSP">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LoginModel.LibraryBookReturnListSP_Result">
+                <ScalarProperty Name="ReturnID" ColumnName="ReturnID" />
+                <ScalarProperty Name="IssueID" ColumnName="IssueID" />
+                <ScalarProperty Name="ReturnNo" ColumnName="ReturnNo" />
+                <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
+                <ScalarProperty Name="IssueNo" ColumnName="IssueNo" />
+                <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="AccessionNo" ColumnName="AccessionNo" />
+                <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="MemberType" ColumnName="MemberType" />
+                <ScalarProperty Name="MemberCode" ColumnName="MemberCode" />
+                <ScalarProperty Name="MemberName" ColumnName="MemberName" />
+                <ScalarProperty Name="DaysInHand" ColumnName="DaysInHand" />
+                <ScalarProperty Name="Fine" ColumnName="Fine" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

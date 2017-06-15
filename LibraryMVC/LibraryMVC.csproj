@@ -168,6 +168,7 @@
     <Compile Include="Controllers\LoginSuccessController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
+    <Compile Include="Controllers\ReturnController.cs" />
     <Compile Include="Controllers\SubMasterController.cs" />
     <Compile Include="DAL\clsDBOperations.cs" />
     <Compile Include="DAL\LibraryContext.cs" />
@@ -189,6 +190,12 @@
       <DependentUpon>Login.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LibraryBookMasterListSP_Result.cs">
+      <DependentUpon>Login.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LibraryBookReturnDetailsSP_Result.cs">
+      <DependentUpon>Login.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LibraryBookReturnListSP_Result.cs">
       <DependentUpon>Login.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LibraryGetIssueDetails_Result.cs">
@@ -392,6 +399,8 @@
     <Content Include="Views\Issue\BookSelectionList.cshtml" />
     <Content Include="Views\Issue\MemberSelection.cshtml" />
     <Content Include="Views\Issue\MemberSelectionList.cshtml" />
+    <Content Include="Views\Return\Index.cshtml" />
+    <Content Include="Views\Return\ReturnList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
