@@ -1,0 +1,75 @@
+﻿@model List<LibraryMVC.Models.LibraryBookIssueListSP_Result >
+
+<div class="modal-body">
+    <div class="row" style="font-family:Calibri ;font-size:10px">
+        <table style="width:100%;" align="center">
+            <tr>
+                <td style="width:100%;" class="SubHead">
+                    SEARCH ISSUES
+                </td>
+            </tr>
+        </table>
+        <br />
+        <table style="width:90%;" align="center">
+            <tr>
+                <td colspan="2">
+                    @Html.Label("", new { @ID = "lblInfo" })
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="text" id="txtSearch" placeholder="Type here to search..." style="width:100%" class="TextBoxTDBG4" />
+                    <br />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div id="divPartialView">
+                        @Html.Partial("~/Views/Return/IssueSelectionList.cshtml", Model)
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div style="font-family:Calibri ;font-size:12px">
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#approve-btn').click(function () {
+            $('#modal-container').modal('hide');
+        });
+    });
+
+    $('#txtSearch').keyup(function (e) {
+        var searchval = $("#txtSearch").val();
+        if (e.keyCode == 8 || e.keyCode == 48) {
+            $.ajax(
+                    {
+                        type: "POST",
+                        url: "/Return/SearchIssue",
+                        data: { searchText: searchval },
+                        dataType: "html",
+                        success: function (data) { $("#divPartialView").html(data); }
+
+                    }
+                    );
+        }
+        else {
+            if (searchval.length >= 3) {
+                $.ajax(
+                    {
+                        type: "POST",
+                        url: "/Return/SearchIssue",
+                        data: { searchText: searchval },
+                        dataType: "html",
+                        success: function (data) { $("#divPartialView").html(data); }
+
+                    }
+                    );
+            }
+        }
+    });
+</script>
+

@@ -470,5 +470,20 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="School_LibraryReturn">
+      <EntityTypeMapping TypeName="LoginModel.School_LibraryReturn">
+        <MappingFragment StoreEntitySet="School_LibraryReturn">
+          <ScalarProperty Name="RType" ColumnName="RType" />
+          <ScalarProperty Name="RenewalDateOld" ColumnName="RenewalDateOld" />
+          <ScalarProperty Name="IssueId" ColumnName="IssueId" />
+          <ScalarProperty Name="Modifiedtime" ColumnName="Modifiedtime" />
+          <ScalarProperty Name="ModifiedUser" ColumnName="ModifiedUser" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="RetunNo" ColumnName="RetunNo" />
+          <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

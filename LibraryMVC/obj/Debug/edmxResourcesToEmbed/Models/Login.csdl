@@ -70,6 +70,11 @@
       <Parameter Name="Shift" Mode="In" Type="String" />
       <Parameter Name="date" Mode="In" Type="DateTime" />
     </FunctionImport>
+    <EntitySet Name="School_LibraryReturn" EntityType="LoginModel.School_LibraryReturn" />
+    <AssociationSet Name="FK_School_LibraryReturn_School_LibraryIssue" Association="LoginModel.FK_School_LibraryReturn_School_LibraryIssue">
+      <End Role="School_LibraryIssue" EntitySet="School_LibraryIssue" />
+      <End Role="School_LibraryReturn" EntitySet="School_LibraryReturn" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="School_LibraryBookMaster">
     <Key>
@@ -387,6 +392,7 @@
     <Property Name="Shift" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="MaxDays" Type="Int32" />
     <Property Name="BookID" Type="Int32" />
+    <NavigationProperty Name="School_LibraryReturn" Relationship="LoginModel.FK_School_LibraryReturn_School_LibraryIssue" FromRole="School_LibraryIssue" ToRole="School_LibraryReturn" />
   </EntityType>
   <ComplexType Name="LibraryBookMasterDetailsSP_Result">
     <Property Type="Int32" Name="BookMastID" Nullable="false" />
@@ -501,4 +507,31 @@
     <Property Type="Int32" Name="DaysInHand" Nullable="true" />
     <Property Type="Decimal" Name="Fine" Nullable="true" Precision="19" />
   </ComplexType>
+  <EntityType Name="School_LibraryReturn">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReturnDate" Type="DateTime" Precision="3" />
+    <Property Name="RetunNo" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedUser" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="Modifiedtime" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="IssueId" Type="Int32" />
+    <Property Name="RenewalDateOld" Type="DateTime" Precision="3" />
+    <Property Name="RType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="School_LibraryIssue" Relationship="LoginModel.FK_School_LibraryReturn_School_LibraryIssue" FromRole="School_LibraryReturn" ToRole="School_LibraryIssue" />
+  </EntityType>
+  <Association Name="FK_School_LibraryReturn_School_LibraryIssue">
+    <End Type="LoginModel.School_LibraryIssue" Role="School_LibraryIssue" Multiplicity="0..1" />
+    <End Type="LoginModel.School_LibraryReturn" Role="School_LibraryReturn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="School_LibraryIssue">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="School_LibraryReturn">
+        <PropertyRef Name="IssueId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

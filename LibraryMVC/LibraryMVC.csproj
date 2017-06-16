@@ -252,6 +252,10 @@
       <DependentUpon>Login.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\School_LibraryIssueMetaData.cs" />
+    <Compile Include="Models\School_LibraryReturn.cs">
+      <DependentUpon>Login.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\School_LibraryReturnMetaData.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -401,6 +405,10 @@
     <Content Include="Views\Issue\MemberSelectionList.cshtml" />
     <Content Include="Views\Return\Index.cshtml" />
     <Content Include="Views\Return\ReturnList.cshtml" />
+    <Content Include="Views\Return\Details.cshtml" />
+    <Content Include="Views\Return\Add.cshtml" />
+    <Content Include="Views\Return\IssueSelection.cshtml" />
+    <Content Include="Views\Return\IssueSelectionList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

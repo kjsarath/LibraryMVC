@@ -1,0 +1,209 @@
+﻿@model LibraryMVC.Models.LibraryBookReturnDetailsSP_Result 
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/cssjqryUi")
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+    <script type="text/javascript">
+     $(document).ready(function () {
+         $('input[type=datetime]').datepicker({
+             dateFormat: "dd/M/yy",
+             changeMonth: true,
+             changeYear: true,
+             yearRange: "-60:+0"
+         });
+
+     });
+
+     $(function () {
+         // Initialize numeric spinner input boxes
+         //$(".numeric-spinner").spinedit();
+         // Initialize modal dialog
+         // attach modal-container bootstrap attributes to links with .modal-link class.
+         // when a link is clicked with these attributes, bootstrap will display the href content in a modal dialog.
+         $('body').on('click', '.modal-link', function (e) {
+             e.preventDefault();
+             $(this).attr('data-target', '#modal-container');
+             $(this).attr('data-toggle', 'modal');
+             $("#txtSearch").focus();
+             $("#lblInfo").text("Test msg!");
+         });
+         // Attach listener to .modal-close-btn's so that when the button is pressed the modal dialog disappears
+         $('body').on('click', '.modal-close-btn', function () {
+             $('#modal-container').modal('hide');
+         });
+         //clear modal cache, so that new content can be loaded
+         $('#modal-container').on('hidden.bs.modal', function () {
+             $(this).removeData('bs.modal');
+         });
+         $('#CancelModal').on('click', function () {
+             return false;
+         });
+     });
+
+     $('#modal-container').on('shown.bs.modal', function () {
+         $('#txtSearch').focus();
+     });
+
+    </script>
+
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken();
+    <div id="modal-container" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" style="overflow-x: scroll; ">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+    <div style="font-family:Calibri ;font-size:10px">
+        <table style="width:100%;">
+            <tr>
+                <td colspan="4" Style="text-align: right; font-family: Corbel; font-size: large;">
+                    BOOK RETURN - DETAILS
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.ReturnID)
+                    @Html.HiddenFor(model => model.IssueID,new { htmlAttributes = new {@ID="IssueID" } } )
+                    @Html.HiddenFor(model => model.BookID, new { htmlAttributes = new { @ID = "BookID" } })
+                    @Html.HiddenFor(model => model.MemberID, new { htmlAttributes = new { @ID = "MemberID" } })
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" class="SubHead">ISSUE DETAILS</td>
+            </tr>
+            <tr>
+                <td class="tdStyle2" style="width:10%">Return No</td>
+                <td class="TextBoxTDBG3" style="width: 40%">
+                    @Html.EditorFor(model => model.ReturnNo, new { htmlAttributes = new { @class = "TextBoxTDBG4" } })
+                    @Html.ValidationMessageFor(model => model.ReturnNo , "", new { @class = "text-danger" })
+                </td>
+                <td class="tdStyle2" style="width:10%">Date</td>
+                <td class="TextBoxTDBG3" style="width: 40%">
+                    @Html.EditorFor(model => model.ReturnDate , new { htmlAttributes = new { @class = "TextBoxTDBG4", @ID = "ReturnDate" } })
+                    @Html.ValidationMessageFor(model => model.ReturnDate, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td class="tdStyle2" style="width:10%">Issued No</td>
+                <td class="TextBoxTDBG3" style="width: 40%">
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:80%">
+                                @Html.EditorFor(model => model.IssueNo , new { htmlAttributes = new { @class = "TextBoxTDBG4", @ID = "IssueNo" } })
+                                @Html.ValidationMessageFor(model => model.IssueNo, "", new { @class = "text-danger" })
+                            </td>
+                            <td style="width:20%">
+                                @Html.ActionLink("Select", "ViewIssueSelection", "Return", null, new { @class = "modal-link btn" })
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td class="tdStyle2" style="width:10%">Issue Date</td>
+                <td class="TextBoxTDBG3" style="width: 40%">
+                    @Html.EditorFor(model => model.IssueDate , new { htmlAttributes = new { @class = "TextBoxTDBG4", @ID = "IssueDate" } })
+                    @Html.ValidationMessageFor(model => model.IssueDate, "", new { @class = "text-danger" })
+                </td>
+
+            </tr>
+            <tr>
+                <td class="tdStyle2" style="width:10%">Days In Hand</td>
+                <td class="TextBoxTDBG3" style="width: 40%">
+                    @Html.EditorFor(model => model.DaysInHand , new { htmlAttributes = new { @class = "TextBoxTDBG4", @ID = "DaysInHand" } })
+                    @Html.ValidationMessageFor(model => model.DaysInHand, "", new { @class = "text-danger" })
+                </td>
+                <td class="tdStyle2" style="width:10%">Fine</td>
+                <td class="TextBoxTDBG3" style="width: 40%">
+                    @Html.EditorFor(model => model.Fine, new { htmlAttributes = new { @class = "TextBoxTDBG4", @ID = "Fine" } })
+                    @Html.ValidationMessageFor(model => model.Fine , "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td class="tdStyle2" style="width:10%">Remarks</td>
+                <td colspan="3" class="TextBoxTDBG3" style="width: 40%">
+                    @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "TextBoxTDBG4", @ID = "Remarks" } })
+                    @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="4" class="SubHead">BOOK DETAILS</td>
+            </tr>
+            <tr>
+                <td class="tdStyle2" style="width:10%">Book Code</td>
+                <td class="TextBoxTDBG3" style="width: 40%">
+                    <span class="dxeBase_DevEx" id="Span7"></span>
+                    @*@Html.DropDownListFor(model => model.BookCode, new SelectList((List<Tuple<string, int>>)ViewBag.BookCodeList, "Item2", "Item1"), "--Select--", new { @class = "TextBoxTDBG4", @ID = "BookCode" })*@
+                    @Html.EditorFor(model => model.BookCode, new { htmlAttributes = new { @class = "TextBoxTDBG4", @ID = "BookCode" } })
+                    @Html.ValidationMessageFor(model => model.BookCode, "", new { @class = "text-danger" })
+                </td>
+                <td class="tdStyle2" style="width:10%">Title</td>
+                <td class="TextBoxTDBG3" style="width: 40%">
+                    <span class="dxeBase_DevEx" id="Span7"></span>
+                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "TextBoxTDBG4", @ID = "Title" } })
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td class="tdStyle2" style="width:10%">Accession No</td>
+                <td class="TextBoxTDBG3" style="width: 40%">
+                    @Html.EditorFor(model => model.AccessionNo, new { htmlAttributes = new { @class = "TextBoxTDBG4", @ID = "AccessionNo" } })
+                    @Html.ValidationMessageFor(model => model.AccessionNo, "", new { @class = "text-danger" })
+                </td>
+                <td class="tdStyle2" style="width:10%">Barcode</td>
+                <td class="TextBoxTDBG3" style="width: 40%">
+                    <span class="dxeBase_DevEx" id="Span10"></span>
+                    @Html.EditorFor(model => model.Barcode, new { htmlAttributes = new { @class = "TextBoxTDBG4", @ID = "Barcode" } })
+                    @Html.ValidationMessageFor(model => model.Barcode, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" class="SubHead">MEMBER DETAILS</td>
+            </tr>
+            <tr>
+                <td class="tdStyle2" style="width:10%">Member Code</td>
+                <td class="TextBoxTDBG3" style="width: 40%">
+                    <span class="dxeBase_DevEx" id="Span10"></span>
+                    @Html.EditorFor(model => model.MemberCode , new { htmlAttributes = new { @class = "TextBoxTDBG4", @ID = "MemberCode" } })
+                    @Html.ValidationMessageFor(model => model.MemberCode , "", new { @class = "text-danger" })
+                </td>
+                <td class="tdStyle2" style="width:10%">Name</td>
+                <td class="TextBoxTDBG3" style="width: 40%">
+                    @Html.EditorFor(model => model.MemberName , new { htmlAttributes = new { @class = "TextBoxTDBG4", @ID = "MemberName" } })
+                    @Html.ValidationMessageFor(model => model.MemberName, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td class="tdStyle2" style="width:10%">Category</td>
+                <td class="TextBoxTDBG3" style="width: 40%">
+                    @Html.EditorFor(model => model.MemberType , new { htmlAttributes = new { @class = "TextBoxTDBG4", @ID = "Category" } })
+                    @Html.ValidationMessageFor(model => model.MemberType, "", new { @class = "text-danger" })
+                </td>
+                <td class="tdStyle2" style="width:10%">Allowed Days</td>
+                <td class="TextBoxTDBG3" style="width: 40%">
+                    @Html.EditorFor(model => model.NoOfDays , new { htmlAttributes = new { @class = "TextBoxTDBG4", @ID = "NoOfDays" } })
+                    @Html.ValidationMessageFor(model => model.NoOfDays, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            
+        </table>
+    </div>
+    <br />
+    <form method="post">
+        <div class="form-group">
+            <div style="text-align: left">
+                <input type="submit" name="action:Save" value="Save" class="btn btn-success " />
+                <input type="submit" name="action:Back" value="Cancel" class="btn btn-danger" />
+            </div>
+        </div>
+        <div style="text-align: left">
+            <input type="submit" name="action:Back" value="Back To List" class="btn btn-primary " />
+        </div>
+    </form>
+}

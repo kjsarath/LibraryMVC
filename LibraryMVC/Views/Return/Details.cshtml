@@ -1,0 +1,145 @@
+﻿@model LibraryMVC.Models.LibraryBookReturnDetailsSP_Result 
+@{
+    ViewBag.Title = "Book Return - Details";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+
+<h2></h2>
+<div style="font-family:Calibri ;font-size:10px">
+    <table style="width:100%">
+        <tr>
+            <td colspan="4" Style="text-align: right; font-family: Corbel; font-size: large;">
+                DETAILS OF BOOK RETURN
+                <hr />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="SubHead">RETURN DETAILS</td>
+            @Html.HiddenFor(model => model.ReturnID )
+            @Html.HiddenFor(model => model.MemberID)
+            @Html.HiddenFor(model => model.BookID)
+            @Html.HiddenFor(model=>model.IssueID )
+        </tr>
+        <tr>
+            <td align="right" class="tdStyle" style="width: 10%">Return No</td>
+            <td class="TextBoxTDBG2" style="width: 40%">
+                <span class="dxeBase_DevEx" id="Span1"></span>
+                @Html.DisplayFor(model => model.ReturnNo )
+            </td>
+            <td align="right" class="tdStyle" style="width: 10%">Date</td>
+            <td class="TextBoxTDBG2" style="width: 40%">
+                <span class="dxeBase_DevEx" id="Span1"></span>
+                @Html.DisplayFor(model => model.ReturnDate )
+            </td>
+
+        </tr>
+        <tr>
+            <td align="right" class="tdStyle" style="width: 10%; height: 24px;">Issued No</td>
+            <td class="TextBoxTDBG2" style="width: 40%">
+                <span class="dxeBase_DevEx" id="ctl00_MainContent_ASPxCallbackPanelMain_txtCode"></span>
+                @Html.DisplayFor(model => model.IssueNo)
+            </td>
+            <td align="right" class="tdStyle" style="width: 10%; height: 24px;">Issue Date</td>
+            <td class="TextBoxTDBG2" style="width: 40%">
+                <span class="dxeBase_DevEx" id="ctl00_MainContent_ASPxCallbackPanelMain_txtCode"></span>
+                @Html.DisplayFor(model => model.IssueDate )
+            </td>
+        </tr>
+        <tr>
+            <td align="right" class="tdStyle" style="width: 10%">Days In Hand</td>
+            <td class="TextBoxTDBG2" style="width: 40%">
+                <span class="dxeBase_DevEx" id="Span2"></span>
+                @Html.DisplayFor(model => model.DaysInHand )
+            </td>
+            <td align="right" class="tdStyle" style="width: 10%">Fine</td>
+            <td class="TextBoxTDBG2" style="width: 40%">
+                <span class="dxeBase_DevEx" id="Span2"></span>
+                @Html.DisplayFor(model => model.Fine)
+            </td>
+        </tr>
+        <tr>
+            <td align="right" class="tdStyle" style="width: 10%">Remarks</td>
+            <td colspan="3" class="TextBoxTDBG2" style="width: 40%">
+                <span class="dxeBase_DevEx" id="Span2"></span>
+                @Html.DisplayFor(model => model.Remarks )
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="SubHead">BOOK DETAILS</td>
+        </tr>
+        <tr>
+            <td align="right" class="tdStyle" style="width: 10%">Book Code</td>
+            <td class="TextBoxTDBG2" style="width: 40%">
+                <span class="dxeBase_DevEx" id="Span7"></span>
+                @Html.DisplayFor(model => model.BookCode)
+            </td>
+            <td align="right" class="tdStyle" style="width: 10%">Title</td>
+            <td class="TextBoxTDBG2" style="width: 40%">
+                <span class="dxeBase_DevEx" id="Span7"></span>
+                @Html.DisplayFor(model => model.Title)
+            </td>
+        </tr>
+        <tr>
+            <td align="right" class="tdStyle" style="width: 10%">Accession No</td>
+            <td class="TextBoxTDBG2" style="width: 40%">
+                <span class="dxeBase_DevEx" id="Span7"></span>
+                @Html.DisplayFor(model => model.AccessionNo)
+            </td>
+            <td align="right" class="tdStyle" style="width: 10%">Barcode</td>
+            <td class="TextBoxTDBG2" style="width: 40%">
+                <span class="dxeBase_DevEx" id="Span7"></span>
+                @Html.DisplayFor(model => model.Barcode)
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="SubHead">MEMBER DETAILS</td>
+        </tr>
+        <tr>
+            <td align="right" class="tdStyle" style="width: 10%">Member Code</td>
+            <td class="TextBoxTDBG2" style="width: 40%">
+                <span class="dxeBase_DevEx" id="Span3"></span>
+                @Html.DisplayFor(model => model.MemberCode )
+            </td>
+            <td align="right" class="tdStyle" style="width: 10%">Name</td>
+            <td class="TextBoxTDBG2" style="width: 40%">
+                <span class="dxeBase_DevEx" id="Span3"></span>
+                @Html.DisplayFor(model => model.MemberName )
+            </td>
+        </tr>
+        <tr>
+            <td align="right" class="tdStyle" style="width: 10%">Category</td>
+            <td class="TextBoxTDBG2" style="width: 40%">
+                <span class="dxeBase_DevEx" id="Span3"></span>
+                @Html.DisplayFor(model => model.MemberType )
+            </td>
+            <td align="right" class="tdStyle" style="width: 10%">Allowed Days</td>
+            <td class="TextBoxTDBG2" style="width: 40%">
+                <span class="dxeBase_DevEx" id="Span3"></span>
+                @Html.DisplayFor(model => model.NoOfDays)
+            </td>
+        </tr>
+    </table>
+</div>
+<br />
+<table style="width:100%">
+    <tr>
+        <td style="width:60px">
+            <form method="get">
+                <div class="form-group">
+                    <div style="text-align: left">
+                        <input type="submit" name="action:Edit" value="Edit" class="btn btn-success " />
+                    </div>
+                </div>
+            </form>
+        </td>
+        <td>
+            <form method="post">
+                <div class="form-group">
+                    <div style="text-align: left">
+                        <input type="submit" name="action:Back" value="Back To List" class="btn btn-primary " />
+                    </div>
+                </div>
+            </form>
+        </td>
+    </tr>
+</table>

@@ -168,6 +168,20 @@
     <Property Name="MaxDays" Type="int" />
     <Property Name="BookID" Type="int" />
   </EntityType>
+  <EntityType Name="School_LibraryReturn">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReturnDate" Type="datetime" />
+    <Property Name="RetunNo" Type="nvarchar" MaxLength="30" />
+    <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
+    <Property Name="ModifiedUser" Type="nchar" MaxLength="20" />
+    <Property Name="Modifiedtime" Type="nchar" MaxLength="20" />
+    <Property Name="IssueId" Type="int" />
+    <Property Name="RenewalDateOld" Type="datetime" />
+    <Property Name="RType" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <Association Name="FK_Accounts_Accounts">
     <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
     <End Role="Accounts1" Type="Self.Accounts" Multiplicity="*" />
@@ -191,6 +205,18 @@
       </Principal>
       <Dependent Role="School_LibraryBookDetails">
         <PropertyRef Name="BookMastID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_School_LibraryReturn_School_LibraryIssue">
+    <End Role="School_LibraryIssue" Type="Self.School_LibraryIssue" Multiplicity="0..1" />
+    <End Role="School_LibraryReturn" Type="Self.School_LibraryReturn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="School_LibraryIssue">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="School_LibraryReturn">
+        <PropertyRef Name="IssueId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -238,6 +264,7 @@
     <EntitySet Name="School_LibraryBookMaster" EntityType="Self.School_LibraryBookMaster" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="School_LibraryCategoryMaster" EntityType="Self.School_LibraryCategoryMaster" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="School_LibraryIssue" EntityType="Self.School_LibraryIssue" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="School_LibraryReturn" EntityType="Self.School_LibraryReturn" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Accounts_Accounts" Association="Self.FK_Accounts_Accounts">
       <End Role="Accounts" EntitySet="Accounts" />
       <End Role="Accounts1" EntitySet="Accounts" />
@@ -245,6 +272,10 @@
     <AssociationSet Name="FK_School_LibraryBookDetails_School_LibraryBookMaster" Association="Self.FK_School_LibraryBookDetails_School_LibraryBookMaster">
       <End Role="School_LibraryBookMaster" EntitySet="School_LibraryBookMaster" />
       <End Role="School_LibraryBookDetails" EntitySet="School_LibraryBookDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_School_LibraryReturn_School_LibraryIssue" Association="Self.FK_School_LibraryReturn_School_LibraryIssue">
+      <End Role="School_LibraryIssue" EntitySet="School_LibraryIssue" />
+      <End Role="School_LibraryReturn" EntitySet="School_LibraryReturn" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

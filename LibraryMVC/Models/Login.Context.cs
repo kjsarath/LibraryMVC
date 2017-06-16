@@ -34,6 +34,7 @@ namespace LibraryMVC.Models
         public virtual DbSet<Library_Members> Library_Members { get; set; }
         public virtual DbSet<School_LibraryCategoryMaster> School_LibraryCategoryMaster { get; set; }
         public virtual DbSet<School_LibraryIssue> School_LibraryIssue { get; set; }
+        public virtual DbSet<School_LibraryReturn> School_LibraryReturn { get; set; }
     
         public virtual ObjectResult<LibraryBookMasterListSP_Result> LibraryBookMasterListSP()
         {

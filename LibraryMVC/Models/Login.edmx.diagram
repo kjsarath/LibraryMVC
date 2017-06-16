@@ -14,6 +14,8 @@
         <EntityTypeShape EntityType="LoginModel.Library_Members" Width="1.5" PointX="7.25" PointY="0.75" />
         <EntityTypeShape EntityType="LoginModel.School_LibraryCategoryMaster" Width="1.5" PointX="7.25" PointY="5.25" />
         <EntityTypeShape EntityType="LoginModel.School_LibraryIssue" Width="1.5" PointX="8.875" PointY="0.75" />
+        <EntityTypeShape EntityType="LoginModel.School_LibraryReturn" Width="1.5" PointX="10.5" PointY="0.75" />
+        <AssociationConnector Association="LoginModel.FK_School_LibraryReturn_School_LibraryIssue" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

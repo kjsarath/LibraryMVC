@@ -14,6 +14,12 @@ namespace LibraryMVC.Models
     
     public partial class School_LibraryIssue
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public School_LibraryIssue()
+        {
+            this.School_LibraryReturn = new HashSet<School_LibraryReturn>();
+        }
+    
         public int ID { get; set; }
         public string IssueNo { get; set; }
         public Nullable<System.DateTime> FromDate { get; set; }
@@ -32,5 +38,8 @@ namespace LibraryMVC.Models
         public string Shift { get; set; }
         public Nullable<int> MaxDays { get; set; }
         public Nullable<int> BookID { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<School_LibraryReturn> School_LibraryReturn { get; set; }
     }
 }

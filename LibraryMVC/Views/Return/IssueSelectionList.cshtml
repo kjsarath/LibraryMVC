@@ -1,0 +1,54 @@
+﻿@model List<LibraryMVC.Models.LibraryBookIssueListSP_Result >
+<div style="font-family:Calibri ;font-size:12px">
+    @{
+        WebGrid grid = new WebGrid(Model, canPage: true, rowsPerPage: 10, selectionFieldName: "selectedRow", ajaxUpdateContainerId: "gridContent");
+        <div id="gridContent">
+            @grid.GetHtml(
+                            tableStyle: "table table-bordered table-striped table-condensed",
+                            mode: WebGridPagerModes.All,
+                            firstText: "<<First",
+                            lastText: "Last>>",
+                            nextText: "Next>",
+                            previousText: "<Prev",
+                            headerStyle: "grid-header",
+                         footerStyle: "webgrid-footer",
+                         alternatingRowStyle: "webgrid-alternating-row",
+                         selectedRowStyle: "webgrid-selected-row",
+                         rowStyle: "gridrow",
+                         columns: grid.Columns
+                         (
+                            grid.Column("IssueNo", "ISSUE NO"),
+                            grid.Column("DueDate", "DUE DATE", format: (item) => item.DueDate != null ? item.DueDate.ToString("dd/MM/yyyy") : "", canSort: true),
+                            grid.Column("Title", "TITLE"),
+                            grid.Column("AccessionNo", "ACCESSION NO"),
+                            grid.Column("MemberName", "MEMBER NAME"),
+                            grid.Column("", format: @<button class="edit-member" type="button" id="@item.ID">Select</button>)
+                        )
+                )
+        </div>
+    }
+</div>
+<script type="text/javascript">
+    $(document).on('click', '.edit-member', function () {
+        $.ajax({
+            url: '/Return/FillIssueData',
+            type: "GET",
+            dataType: "JSON",
+            data: { ID: $(this).attr('id') },
+            success: function (mems) {
+                $("#IssueNo").val(mems.IssueNo);
+                $("#IssueDate").val(mems.FromDate);
+                $("#Category").val(mems.MemberType);
+                $("#MemberID").val(mems.MemberID);
+                $("#MemberName").val(mems.AccountName);
+                $("#MemberCode").val(mems.AccountCode);
+                $("#AccessionNo").val(mems.AccessionNo);
+                $("#Title").val(mems.Title);
+                $("#BookCode").val(mems.BookCode);
+                $("#Barcode").val(mems.Barcode);
+                $("#NoOfDays").val(mems.NoOfDays);
+            }
+        });
+        $('#modal-container').modal('hide');
+    });
+</script>
