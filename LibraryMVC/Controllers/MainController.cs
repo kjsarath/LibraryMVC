@@ -1,5 +1,7 @@
-﻿using System;
+﻿using LibraryMVC.DAL;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -28,18 +30,24 @@ namespace LibraryMVC.Controllers
         {
             List<object> iData = new List<object>();
             List<string> labels = new List<string>();
-            labels.Add("January");
-            labels.Add("February");
-            labels.Add("March");
-            labels.Add("April");
+            //labels.Add("January");
+            //labels.Add("February");
+            //labels.Add("March");
+            //labels.Add("April");
             List<int> lst_dataItem_1 = new List<int>();
-            lst_dataItem_1.Add(1);
-            lst_dataItem_1.Add(2);
-            lst_dataItem_1.Add(3);
-            lst_dataItem_1.Add(4);
-            iData.Add(labels);
-            iData.Add(lst_dataItem_1);
+            //lst_dataItem_1.Add(1);
+            //lst_dataItem_1.Add(2);
+            //lst_dataItem_1.Add(3);
+            //lst_dataItem_1.Add(4);
+            //iData.Add(labels);
+            //iData.Add(lst_dataItem_1);
+            OrisonSystemSCHOOLEntities db = new OrisonSystemSCHOOLEntities();
+            DataTable dtAcc = clsDBOperations.GetTable("Select * from dbo.Library_IssueReturnComparisonFn", db);
             return Json(iData, JsonRequestBehavior.AllowGet);
         }
+    }
+
+    internal class OrisonSystemSCHOOLEntities
+    {
     }
 }
