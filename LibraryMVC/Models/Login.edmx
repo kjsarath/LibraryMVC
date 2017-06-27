@@ -182,7 +182,7 @@
           <Property Name="RetunNo" Type="nvarchar" MaxLength="30" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
           <Property Name="ModifiedUser" Type="nchar" MaxLength="20" />
-          <Property Name="Modifiedtime" Type="nchar" MaxLength="20" />
+          <Property Name="Modifiedtime" Type="nchar" MaxLength="100" />
           <Property Name="IssueId" Type="int" />
           <Property Name="RenewalDateOld" Type="datetime" />
           <Property Name="RType" Type="nvarchar" MaxLength="50" />
@@ -803,7 +803,7 @@
           <Property Name="RetunNo" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedUser" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
-          <Property Name="Modifiedtime" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Modifiedtime" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
           <Property Name="IssueId" Type="Int32" />
           <Property Name="RenewalDateOld" Type="DateTime" Precision="3" />
           <Property Name="RType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />

@@ -409,6 +409,7 @@
     <Content Include="Views\Return\Add.cshtml" />
     <Content Include="Views\Return\IssueSelection.cshtml" />
     <Content Include="Views\Return\IssueSelectionList.cshtml" />
+    <Content Include="Views\Main\Chart1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

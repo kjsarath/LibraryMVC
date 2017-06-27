@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using LibraryMVC.Models;
 using LibraryMVC.DAL;
+using System.Data;
+using System.Data.Entity.Infrastructure;
 
 namespace LibraryMVC.Controllers
 {
@@ -35,6 +37,14 @@ namespace LibraryMVC.Controllers
             rD.ReturnNo = rNo;
             rD.ReturnDate = DateTime.Today;
             return View(rD);
+        }
+
+        [HttpGet ]
+        [MultipleButton(Name = "action", Argument = "Edit")]
+        public ActionResult Edit(int? ID)
+        {
+            var biD = db.LibraryBookReturnDetailsSP((int)ID,"%").Single();
+            return View("Add", biD);
         }
 
         public PartialViewResult SearchGrid(String searchText)
@@ -75,61 +85,79 @@ namespace LibraryMVC.Controllers
         [MultipleButton(Name ="action",Argument ="Save")]
         public ActionResult Save(int? ID)
         {
-            if(ID==null)
-            {
-                var rD = new LibraryBookReturnDetailsSP_Result();
-                if (TryUpdateModel(rD))
+                if (ID == null)
                 {
-                    String rNo = db.Database.SqlQuery<String>("SELECT dbo.getNextReturnNo()").ToList().FirstOrDefault();
-                    rD.ReturnNo = rNo;
-                    var r = new School_LibraryReturn();
-                    r.RetunNo = rNo;
-                    r.IssueId = rD.IssueID;
-                    r.Modifiedtime = DateTime.Now.ToShortDateString();
-                    r.ModifiedUser = "0";
-                    r.Remarks = rD.Remarks;
-                    r.ReturnDate = rD.ReturnDate;
-                    r.RType = "Returned";
-                    db.School_LibraryReturn.Add(r);
-                    db.SaveChanges();
-                    var isD = db.School_LibraryIssue.Where(i => i.ID == rD.IssueID).FirstOrDefault();
-                    isD.IssueStatus = "Returned";
-                    isD.Fine = rD.Fine;
-                    isD.RID = r.ID;
-                    var bd = db.School_LibraryBookDetails.Where(d => d.BookID == rD .BookID).Single();
-                    if (isD.IssueStatus == "Returned") bd.IssueStatus = "In";
-                    else bd.IssueStatus = "Out";
-                    db.SaveChanges();
+                    var rD = new LibraryBookReturnDetailsSP_Result();
+                    if (TryUpdateModel(rD))
+                    {
+                        try
+                        {
+                            String rNo = db.Database.SqlQuery<String>("SELECT dbo.getNextReturnNo()").ToList().FirstOrDefault();
+                            rD.ReturnNo = rNo;
+                            var r = new School_LibraryReturn();
+                            r.RetunNo = rNo;
+                            r.IssueId = rD.IssueID;
+                            r.Modifiedtime = DateTime.Now.ToLongDateString();
+                            r.ModifiedUser = "0";
+                            r.Remarks = rD.Remarks;
+                            r.ReturnDate = rD.ReturnDate;
+                            r.RType = "Returned";
+                            db.School_LibraryReturn.Add(r);
+                            db.SaveChanges();
+                            var isD = db.School_LibraryIssue.Where(i => i.ID == rD.IssueID).FirstOrDefault();
+                            isD.IssueStatus = "Returned";
+                            isD.Fine = rD.Fine;
+                            isD.RID = r.ID;
+                            var bd = db.School_LibraryBookDetails.Where(d => d.BookID == rD.BookID).Single();
+                            if (isD.IssueStatus == "Returned") bd.IssueStatus = "In";
+                            else bd.IssueStatus = "Out";
+                            db.SaveChanges();
+                        }
+                        catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+                        { }
+                        catch (RetryLimitExceededException)
+                        {
+                            ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, contact your system administrator.");
+                        }
+                    }
+
                 }
-            }
-            else
-            {
-                var rD = db.LibraryBookReturnDetailsSP((int)ID, "%").FirstOrDefault();
-                if (TryUpdateModel(rD))
+                else
                 {
-                    var r = db.School_LibraryReturn.Where(d => d.ID == (int)ID).FirstOrDefault();
-                    r.IssueId = rD.IssueID;
-                    r.Modifiedtime = DateTime.Now.ToShortDateString();
-                    r.ModifiedUser = "0";
-                    r.Remarks = rD.Remarks;
-                    r.ReturnDate = rD.ReturnDate;
-                    r.RType = "Returned";
-                    var isD = db.School_LibraryIssue.Where(i => i.ID == rD.IssueID).FirstOrDefault();
-                    isD.IssueStatus = "Returned";
-                    isD.Fine = rD.Fine;
-                    var bd = db.School_LibraryBookDetails.Where(d => d.BookID == rD.BookID).Single();
-                    if (isD.IssueStatus == "Returned") bd.IssueStatus = "In";
-                    else bd.IssueStatus = "Out";
-                    db.SaveChanges();
+                    var rD = db.LibraryBookReturnDetailsSP((int)ID, "%").FirstOrDefault();
+                    if (TryUpdateModel(rD))
+                    {
+                        try
+                        {
+                            var r = db.School_LibraryReturn.Where(d => d.ID == (int)ID).FirstOrDefault();
+                            r.IssueId = rD.IssueID;
+                            r.Modifiedtime = DateTime.Now.ToLongDateString();
+                            r.ModifiedUser = "0";
+                            r.Remarks = rD.Remarks;
+                            r.ReturnDate = rD.ReturnDate;
+                            r.RType = "Returned";
+                            var isD = db.School_LibraryIssue.Where(i => i.ID == rD.IssueID).FirstOrDefault();
+                            isD.IssueStatus = "Returned";
+                            isD.Fine = rD.Fine;
+
+                            var bd = db.School_LibraryBookDetails.Where(d => d.BookID == rD.BookID).Single();
+                            if (isD.IssueStatus == "Returned") bd.IssueStatus = "In";
+                            else bd.IssueStatus = "Out";
+                            db.SaveChanges();
+                        }
+                        catch (RetryLimitExceededException)
+                        {
+                            ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, contact your system administrator.");
+                        }
+                    }
                 }
-            }
-            return View();
+                return RedirectToAction("Index");
         }
 
         public ActionResult ViewIssueSelection()
         {
             var isL = db.LibraryBookIssueListSP("%", "%").Where(ir=>ir.IssueStatus!="Returned").ToList();
-            return View("IssueSelection", isL);
+            return PartialView("IssueSelection", isL);
         }
 
         [HttpPost]

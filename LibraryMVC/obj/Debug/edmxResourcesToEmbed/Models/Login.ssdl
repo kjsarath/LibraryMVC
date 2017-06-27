@@ -177,7 +177,7 @@
     <Property Name="RetunNo" Type="nvarchar" MaxLength="30" />
     <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
     <Property Name="ModifiedUser" Type="nchar" MaxLength="20" />
-    <Property Name="Modifiedtime" Type="nchar" MaxLength="20" />
+    <Property Name="Modifiedtime" Type="nchar" MaxLength="100" />
     <Property Name="IssueId" Type="int" />
     <Property Name="RenewalDateOld" Type="datetime" />
     <Property Name="RType" Type="nvarchar" MaxLength="50" />
