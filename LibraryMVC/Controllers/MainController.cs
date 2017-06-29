@@ -77,12 +77,21 @@ namespace LibraryMVC.Controllers
             }
             return Json(iData, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public JsonResult Chart4()
+        {
+            List<object> iData = new List<object>();
+            List<object> ilbl = new List<object>();
+            DataTable dtAcc = clsDBOperations.GetTable("Select * from dbo.[Library_PurchasedBooksPerYearFn]()", db);
+            foreach (DataColumn dc in dtAcc.Columns)
+            {
+                List<object> x = new List<object>();
+                x = (from DataRow dr in dtAcc.Rows select dr[dc.ColumnName]).ToList();
+                iData.Add(x);
+            }
+            return Json(iData, JsonRequestBehavior.AllowGet);
+        }
     }
     
-}
-public class InOutComparisonData
-{
-    public string label { get; set; }
-    public object value { get; set; }
-    public string color { get; set; }
 }

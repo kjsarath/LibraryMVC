@@ -7,12 +7,8 @@
 <h2 Style="text-align: right; font-family: Corbel; font-size: large;">LIBRARY MAIN</h2>
 @section head
 {
-    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js" type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js" type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js" type="text/javascript"></script>*@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js" type="text/javascript"></script>
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-    @*<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>*@
 }
 @using (Html.BeginForm("Index", "Main", null, FormMethod.Post))
 {
@@ -38,6 +34,10 @@
             </div>
         </div>
         <div class="col-md-6">
+            PURCHASED BOOKS PER YEAR
+            <div class="chart-container" style="width:100%">
+                <canvas id="myChart4" style="padding: 0;margin: auto;display: block;"> </canvas>
+            </div>
         </div>
     </div>
     <div Style="font-family: Corbel; font-size: small ;text-align:center; " class="row">
@@ -92,9 +92,10 @@
                     type: 'line',
                     data: dataT,
                     options: {
+                        legend: { position: 'bottom' },
                         scales: {
-                            xAxes: [{ display: true, scaleLabel: { display: false, labelString: 'Date' } }],
-                            yAxes: [{ display: true, scaleLabel: { display: false, labelString: 'Count' }, ticks: { stepSize: 1, beginAtZero: true } }]
+                            xAxes: [{ gridLines: { display: false }, display: true, scaleLabel: { display: false, labelString: 'Date' } }],
+                            yAxes: [{ gridLines: { display: false }, display: true, scaleLabel: { display: false, labelString: 'Count' }, ticks: { stepSize: 1, beginAtZero: true } }]
                         },
                         elements: { line: { tension: 0 } }
                     },
@@ -129,6 +130,7 @@
                     data: dataT,
                     options: {
                         responsive: false,
+                        legend: { position: 'bottom' },
                         cutoutPercentage: 60,
                         //radiusPercentage: 0.8,
                         circumference: Math.PI,
@@ -164,10 +166,44 @@
                     data: dataT,
                     options: {
                         responsive: true,
+                        legend: { position: 'bottom' },
                         scales: {
-                            xAxes: [{ display: true, scaleLabel: { display: false, labelString: 'Book Code' } }],
-                            yAxes: [{ display: true, scaleLabel: { display: false, labelString: 'Count' }, ticks: { stepSize: 4, beginAtZero: true } }]
+                            xAxes: [{ gridLines: { display: false }, display: true, scaleLabel: { display: false, labelString: 'Book Code' } }],
+                            yAxes: [{ gridLines: { display: false }, display: true, scaleLabel: { display: false, labelString: 'Count' }, ticks: { stepSize: 4, beginAtZero: true } }]
                         },
+                    }
+                });
+            }
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "/Main/Chart4",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (mems) {
+                var aData = mems;
+                var aLabels = aData[0];
+                var aDatasets1 = aData[1];
+                var dataT = {
+                    labels: aLabels,
+                    datasets: [{
+                        label: "Count Per Year",
+                        data: aDatasets1,
+                        fill: false,
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(255, 159, 64, 0.2)", "rgba(255, 205, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(201, 203, 207, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(255, 159, 64)", "rgb(255, 205, 86)", "rgb(75, 192, 192)", "rgb(153, 102, 255)", "rgb(201, 203, 207)"],
+                        borderWidth: 1
+                    }]
+                };
+                var ctx = $("#myChart4").get(0).getContext("2d");
+                var myChart = new Chart(ctx, {
+                    type: 'polarArea',
+                    data: dataT,
+                    options: {
+                        responsive: false,
+                        scales: [{ xAxes: [{ gridLines: { display: false } }], yAxes: [{ gridLines: { display: false } }] }],
+                        legend: { position: 'bottom' }
                     }
                 });
             }
