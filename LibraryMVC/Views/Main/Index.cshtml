@@ -16,7 +16,7 @@
 }
 @using (Html.BeginForm("Index", "Main", null, FormMethod.Post))
 {
-    <div Style="font-family: Corbel; font-size: small ;text-align:center ">
+    <div Style="font-family: Corbel; font-size: small ;text-align:center; " class="row">
         <div class="col-md-6">
             BOOK ISSUE-RETURN COMPARISON
             <div class="chart-container" style="width:100%">
@@ -29,18 +29,22 @@
                 <canvas id="myChart2" style="padding: 0;margin: auto;display: block;"> </canvas>
             </div>
         </div>
-        @*<table style="width:100%;height:100% ">
-            <tr style="height:50%">
-                <td style="width:50%;border: 1px solid #337ab7;">
-                </td>
-                <td style="width:50%;border: 1px solid #337ab7;">
-                </td>
-            </tr>
-            <tr style="height:50%">
-                <td style="width:50%"></td>
-                <td style="width:50%"></td>
-            </tr>
-        </table>*@
+    </div>
+    <div Style="font-family: Corbel; font-size: small ;text-align:center;" class="row">
+        <div class="col-md-6">
+            BOOK COPIES
+            <div class="chart-container" style="width:100%">
+                <canvas id="myChart3" style="padding: 0;margin: auto;display: block;"> </canvas>
+            </div>
+        </div>
+        <div class="col-md-6">
+        </div>
+    </div>
+    <div Style="font-family: Corbel; font-size: small ;text-align:center; " class="row">
+        <div class="col-md-6">
+        </div>
+        <div class="col-md-6">
+        </div>
     </div>
     <script>
         $.ajax({
@@ -59,23 +63,27 @@
                     datasets: [{
                         label: "Issues",
                         data: aDatasets1,
-                        pointBackgroundColor: "rgba(98, 194, 228,0.4)",
-                        pointHoverBorderColor: "rgba(98, 194, 228,0.2)",
-                        pointBorderColor: "rgba(102, 154, 225,0.2)",
-                        pointHoverBackgroundColor: "rgba(102, 154, 225,0.4)",
-                        backgroundColor: "rgba(98, 194, 228,0.4)",
-                        borderWidth: 1,
+                        pointRadius: 0,
+                        //pointBackgroundColor: "rgba(255, 99, 132,0.2)",
+                        //pointHoverBorderColor: "rgb(255, 99, 132)",
+                        //pointBorderColor: "rgba(255, 99, 132,0.2)",
+                        bordercolor: "rgb(255, 99, 132)",
+                        //pointHoverBackgroundColor: "rgba(255, 99, 132,0.2)",
+                        backgroundColor: "rgba(255, 99, 132,0.2)",
+                        borderWidth: 2,
                         //backgroundColor: ["#62c2e4", "#669ae1"]
                     },
                     {
                         label: "Returns",
                         data: aDatasets2,
-                        pointBackgroundColor: "rgba(196, 156, 222,0.4)",
-                        pointHoverBorderColor: "rgba(196, 156, 222,0.2)",
-                        pointBorderColor: "rgba(219, 157, 190,0.2)",
-                        pointHoverBackgroundColor: "rgba(219, 157, 190,0.4)",
-                        backgroundColor: "rgba(196, 156, 222,0.4)",
-                        borderWidth: 1,
+                        pointRadius:0,
+                        //pointBackgroundColor: "rgba(75, 192, 192,0.2)",
+                        //pointHoverBorderColor: "rgb(75, 192, 192)",
+                        //pointBorderColor: "rgba(75, 192, 192,0.2)",
+                        bordercolor: "rgb(75, 192, 192)",
+                        //pointHoverBackgroundColor: "rgba(75, 192, 192,0.2)",
+                        backgroundColor: "rgba(75, 192, 192,0.2)",
+                        borderWidth: 2,
                         //backgroundColor: ["#c49cde", "#db9dbe"]
                     }]
                 };
@@ -83,8 +91,15 @@
                 var chart = new Chart(ctx, {
                     type: 'line',
                     data: dataT,
-                    options: {bezierCurve: false},
-                    borderWidth: 1,
+                    options: {
+                        scales: {
+                            xAxes: [{ display: true, scaleLabel: { display: false, labelString: 'Date' } }],
+                            yAxes: [{ display: true, scaleLabel: { display: false, labelString: 'Count' }, ticks: { stepSize: 1, beginAtZero: true } }]
+                        },
+                        elements: { line: { tension: 0 } }
+                    },
+                    
+                    borderWidth: 1
 
                 });
             }
@@ -103,9 +118,9 @@
                 var dataT = {
                     labels: aLabels,
                     datasets: [{
-                        label: "Issues",
+                        label: "",
                         data: aDatasets1,
-                        backgroundColor: ["rgba(98, 194, 228,0.4)", "rgba(196, 156, 222,0.4)"]
+                        backgroundColor: ["rgba(75, 192, 192,0.2)","rgba(255, 99, 132,0.2)"]
                     }]
                 };
                 var ctx = $("#myChart2").get(0).getContext("2d");
@@ -122,5 +137,41 @@
                 });
             }
         });
+
+        $.ajax({
+            type: "POST",
+            url: "/Main/Chart3",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (mems) {
+                var aData = mems;
+                var aLabels = aData[0];
+                var aDatasets1 = aData[1];
+                var dataT = {
+                    labels: aLabels,
+                    datasets: [{
+                        label: "No. of Copies",
+                        data: aDatasets1,
+                        fill: false,
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(255, 159, 64, 0.2)", "rgba(255, 205, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(201, 203, 207, 0.2)"],
+                        borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(255, 159, 64)", "rgb(255, 205, 86)", "rgb(75, 192, 192)", "rgb(153, 102, 255)", "rgb(201, 203, 207)"],
+                        borderWidth: 1
+                    }]
+                };
+                var ctx = $("#myChart3").get(0).getContext("2d");
+                var myPieChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: dataT,
+                    options: {
+                        responsive: true,
+                        scales: {
+                            xAxes: [{ display: true, scaleLabel: { display: false, labelString: 'Book Code' } }],
+                            yAxes: [{ display: true, scaleLabel: { display: false, labelString: 'Count' }, ticks: { stepSize: 4, beginAtZero: true } }]
+                        },
+                    }
+                });
+            }
+        });
+
     </script>
 }
