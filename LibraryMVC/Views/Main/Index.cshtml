@@ -14,13 +14,13 @@
 {
     <div Style="font-family: Corbel; font-size: small ;text-align:center; " class="row">
         <div class="col-md-6">
-            BOOK ISSUE-RETURN COMPARISON
+            @*BOOK ISSUE-RETURN COMPARISON*@
             <div class="chart-container" style="width:100%">
                 <canvas id="myChart" style="padding: 0;margin: auto;display: block;"> </canvas>
             </div>
         </div>
         <div class="col-md-6">
-            BOOK STATUS COMPARISON
+            @*BOOK STATUS COMPARISON*@
             <div style="width:100%;text-align:center;align-content:center;align-items:center; ">
                 <canvas id="myChart2" style="padding: 0;margin: auto;display: block;"> </canvas>
             </div>
@@ -28,13 +28,13 @@
     </div>
     <div Style="font-family: Corbel; font-size: small ;text-align:center;" class="row">
         <div class="col-md-6">
-            BOOK COPIES
+            @*BOOK COPIES*@
             <div class="chart-container" style="width:100%">
                 <canvas id="myChart3" style="padding: 0;margin: auto;display: block;"> </canvas>
             </div>
         </div>
         <div class="col-md-6">
-            PURCHASED BOOKS PER YEAR
+            @*PURCHASED BOOKS PER YEAR*@
             <div class="chart-container" style="width:100%">
                 <canvas id="myChart4" style="padding: 0;margin: auto;display: block;"> </canvas>
             </div>
@@ -92,6 +92,7 @@
                     type: 'line',
                     data: dataT,
                     options: {
+                        title: { display: true, text: 'BOOK ISSUE-RETURNS COMPARISON' },
                         legend: { position: 'bottom' },
                         scales: {
                             xAxes: [{ gridLines: { display: false }, display: true, scaleLabel: { display: false, labelString: 'Date' } }],
@@ -130,11 +131,12 @@
                     data: dataT,
                     options: {
                         responsive: false,
+                        title: { display: true, text: 'BOOK STATUS COMPARISON' },
                         legend: { position: 'bottom' },
                         cutoutPercentage: 60,
                         //radiusPercentage: 0.8,
-                        circumference: Math.PI,
-                        rotation:Math.PI
+                        circumference: 1.5 * Math.PI,
+                        rotation:0.75*Math.PI
                     }
                 });
             }
@@ -166,6 +168,7 @@
                     data: dataT,
                     options: {
                         responsive: true,
+                        title: { display: true, text: 'BOOK COPIES - HIGHEST COUNTS' },
                         legend: { position: 'bottom' },
                         scales: {
                             xAxes: [{ gridLines: { display: false }, display: true, scaleLabel: { display: false, labelString: 'Book Code' } }],
@@ -202,6 +205,7 @@
                     data: dataT,
                     options: {
                         responsive: false,
+                        title: {display: true,text: 'PURCHASED BOOKS PER YEAR'},
                         scales: [{ xAxes: [{ gridLines: { display: false } }], yAxes: [{ gridLines: { display: false } }] }],
                         legend: { position: 'bottom' }
                     }
